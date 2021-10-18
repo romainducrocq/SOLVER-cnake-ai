@@ -11,11 +11,14 @@ class Apple{
         Vector2i m_mat;
         Vector2i m_pos;
 
+        bool is_valid_pos(const std::vector<Vector2i>& body);
+
     public:
         Apple(int cols, int rows);
 
         Vector2i get_pos() const;
-        void update_pos();
+
+        void update_pos(const std::vector<Vector2i>& body);
 };
 
 class Snake{
@@ -28,9 +31,7 @@ class Snake{
     public:
         Snake(int cols, int rows);
 
-        Vector2i get_pos(int i) const;
-
-        size_t get_size() const;
+        const std::vector<Vector2i>& get_body() const;
 
         void update_size();
 

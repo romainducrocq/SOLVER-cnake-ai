@@ -41,10 +41,12 @@ void Game::loop(){
 
         this->m_model.m_snake.update_pos();
         if(this->m_model.m_snake.is_eat(
-            this->m_model.m_apple.get_pos())
-        ){
-            this->m_model.m_apple.update_pos();
+            this->m_model.m_apple.get_pos()
+        )){
             this->m_model.m_snake.update_size();
+            this->m_model.m_apple.update_pos(
+                this->m_model.m_snake.get_body()
+            );
         }
         this->m_model.m_snake.update_body();
         

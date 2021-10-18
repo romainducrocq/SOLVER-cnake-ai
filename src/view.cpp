@@ -101,13 +101,13 @@ void View::draw(const Model& model){
         this->circle_shape_apple, model.m_apple.get_pos().x * m_zoom, model.m_apple.get_pos().y * m_zoom, 
         1, sf::Color(255, 0, 100), sf::Color(0, 0, 0));
 
-    if(model.m_snake.get_size() > this->rectangle_shapes_snake.size()){
+    if(model.m_snake.get_body().size() > this->rectangle_shapes_snake.size()){
         this->rectangle_shapes_snake.push_back(sf::RectangleShape(sf::Vector2f(m_zoom, m_zoom)));
     }
 
-    for(size_t i = 0; i < model.m_snake.get_size(); i++){
+    for(size_t i = 0; i < model.m_snake.get_body().size(); i++){
             this->draw_rectangle_shape(
-                this->rectangle_shapes_snake[i], model.m_snake.get_pos(i).x * m_zoom, model.m_snake.get_pos(i).y * m_zoom,
+                this->rectangle_shapes_snake[i], model.m_snake.get_body()[i].x * m_zoom, model.m_snake.get_body()[i].y * m_zoom,
                 1, sf::Color(58, 191, 39), sf::Color(0, 0, 0));
     }
 
