@@ -1,4 +1,4 @@
-#include "../include/model.h"
+#include "../include/snake.h"
 
 Apple::Apple(int cols, int rows)
     : m_mat(Vector2i(cols, rows)){

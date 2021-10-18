@@ -11,6 +11,16 @@ View::View(std::string name, int cols, int rows, int zoom, float wait)
     this->setup();
 }
 
+void View::wait_exit(){
+    while (this->m_window.isOpen()){
+        sf::Event event;
+        while (this->m_window.pollEvent(event)){
+            if (event.type == sf::Event::Closed)
+                this->m_window.close();
+        }
+    }
+}
+
 int View::get_input() {
     int i = 1;
     for (std::map<int,int>::iterator it=this->m_inputs.begin(); it!=this->m_inputs.end(); ++it, ++i){
@@ -88,17 +98,17 @@ void View::draw(const Model& model){
     this->m_window.clear(sf::Color(51, 51, 51));
 
     this->draw_circle_shape(
-        this->circle_shape_apple, model.apple.get_pos().x * m_zoom, model.apple.get_pos().y * m_zoom, 
+        this->circle_shape_apple, model.m_apple.get_pos().x * m_zoom, model.m_apple.get_pos().y * m_zoom, 
         1, sf::Color(255, 0, 100), sf::Color(0, 0, 0));
 
-    if(model.snake.get_size() > this->rectangle_shapes_snake.size()){
+    if(model.m_snake.get_size() > this->rectangle_shapes_snake.size()){
         this->rectangle_shapes_snake.push_back(sf::RectangleShape(sf::Vector2f(m_zoom, m_zoom)));
     }
 
-    for(size_t i = 0; i < model.snake.get_size(); i++){
+    for(size_t i = 0; i < model.m_snake.get_size(); i++){
             this->draw_rectangle_shape(
-                this->rectangle_shapes_snake[i], model.snake.get_pos(i).x * m_zoom, model.snake.get_pos(i).y * m_zoom,
-                1, sf::Color(255, 255, 255), sf::Color(0, 0, 0));
+                this->rectangle_shapes_snake[i], model.m_snake.get_pos(i).x * m_zoom, model.m_snake.get_pos(i).y * m_zoom,
+                1, sf::Color(58, 191, 39), sf::Color(0, 0, 0));
     }
 
     this->m_window.display();

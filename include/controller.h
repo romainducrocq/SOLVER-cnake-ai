@@ -11,11 +11,13 @@ class Game{
         View m_view;
 
     public:
-        Game();
+        Game(Mode mode);
 
-        int get_action_play();
+        int get_action();
 
         void act(int action);
+
+        void setup();
 
         void loop();
 };

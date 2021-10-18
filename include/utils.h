@@ -3,10 +3,12 @@
 
 #include <string>
 
-static const int COLS = 30;
-static const int ROWS = 30;
-static const int ZOOM = 20;
-static const float WAIT = 0.06f;
+enum Mode{ AGENT, PLAYER };
+
+static const int COLS = 30; // 128;
+static const int ROWS = 30; // 64;
+static const int ZOOM = 20; // 15;
+static const float WAIT = 0.06f; // 0.0f;
 static const std::string NAME = "SNAKE";
 
 struct Vector2i{

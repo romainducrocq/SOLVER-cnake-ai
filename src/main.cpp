@@ -1,51 +1,63 @@
 #include "../include/controller.h"
 
-Game::Game() 
-    : m_model(COLS, ROWS), m_view(NAME, COLS, ROWS, ZOOM, WAIT) {} 
+Game::Game(Mode mode) 
+    : m_model(mode, COLS, ROWS), m_view(NAME, COLS, ROWS, ZOOM, WAIT) {} 
 
 void Game::act(int action){
     switch(action){
     case 1: //left
-        this->m_model.snake.update_dir(Vector2i(-1, 0));
+        this->m_model.m_snake.update_dir(Vector2i(-1, 0));
         break;
     case 2: //right
-        this->m_model.snake.update_dir(Vector2i(1, 0));        
+        this->m_model.m_snake.update_dir(Vector2i(1, 0));        
         break;
     case 3: //up
-        this->m_model.snake.update_dir(Vector2i(0, -1));
+        this->m_model.m_snake.update_dir(Vector2i(0, -1));
         break;
     case 4: //down
-        this->m_model.snake.update_dir(Vector2i(0, 1));
+        this->m_model.m_snake.update_dir(Vector2i(0, 1));
         break;
     default:
         break;
     }
 }
 
-int Game::get_action_play(){
-    return this->m_view.get_input();
+int Game::get_action(){
+    switch (this->m_model.m_mode){
+    case Mode::AGENT:
+        return 0;
+    case Mode::PLAYER:
+        return this->m_view.get_input();
+    default:
+        return 0;
+    }
 }
 
 void Game::loop(){
-    do{
-        this->act(this->get_action_play());
+    while(true){
+        this->act(this->get_action());
 
-        if(this->m_model.snake.is_hit()){
-            this->m_model.snake = Snake(COLS, ROWS);
-        }
-        this->m_model.snake.update_body();
-        this->m_model.snake.update_pos();
-        if(this->m_model.snake.is_eat(this->m_model.apple.get_pos())){
-            this->m_model.apple.update_pos();
-            this->m_model.snake.update_size();
+        if(this->m_model.m_snake.is_hit()){
+            this->m_view.wait_exit();
+            break;
         }
 
-    }while(this->m_view.loop(this->m_model));
+        this->m_model.m_snake.update_body();
+        this->m_model.m_snake.update_pos();
+        if(this->m_model.m_snake.is_eat(
+            this->m_model.m_apple.get_pos())
+        ){
+            this->m_model.m_apple.update_pos();
+            this->m_model.m_snake.update_size();
+        }
+
+        if(!(this->m_view.loop(this->m_model))){
+            break;
+        }
+    }
 }
 
 int main(){
-
-    Game game;
+    Game game(Mode::PLAYER);
     game.loop();
-
 }

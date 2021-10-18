@@ -36,6 +36,8 @@ class View{
     public:
         View(std::string name, int cols, int rows, int zoom, float wait);
 
+        void wait_exit();
+
         int get_input();
 
         void handle_input(sf::Event event, sf::RenderWindow& window);
