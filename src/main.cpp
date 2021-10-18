@@ -1,7 +1,11 @@
 #include "../include/controller.h"
 
+#include <iostream>
+
 Game::Game(Mode mode) 
-    : m_model(mode, COLS, ROWS), m_view(NAME, COLS, ROWS, ZOOM, WAIT) {} 
+    : m_model(mode, COLS, ROWS), m_view(NAME, COLS, ROWS, ZOOM, WAIT) {
+        this->loop();
+    } 
 
 void Game::act(int action){
     switch(action){
@@ -36,6 +40,7 @@ int Game::get_action(){
 void Game::loop(){
     while(true){
         this->act(this->get_action());
+        this->m_model.m_snake.update_pos();
 
         if(this->m_model.m_snake.is_hit()){
             this->m_view.wait_exit();
@@ -43,14 +48,13 @@ void Game::loop(){
         }
 
         this->m_model.m_snake.update_body();
-        this->m_model.m_snake.update_pos();
         if(this->m_model.m_snake.is_eat(
             this->m_model.m_apple.get_pos())
         ){
             this->m_model.m_apple.update_pos();
             this->m_model.m_snake.update_size();
         }
-
+        
         if(!(this->m_view.loop(this->m_model))){
             break;
         }
@@ -59,5 +63,4 @@ void Game::loop(){
 
 int main(){
     Game game(Mode::PLAYER);
-    game.loop();
 }
