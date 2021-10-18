@@ -60,5 +60,6 @@ void Game::loop(){
 }
 
 int main(){
+    std::srand(time(nullptr));
     Game game(Mode::PLAYER);
 }

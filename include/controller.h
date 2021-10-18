@@ -1,6 +1,9 @@
 #ifndef _CONTROLLER_H
 #define _CONTROLLER_H
 
+#include <cstdlib>
+#include <ctime>
+
 #include "utils.h"
 #include "model.h"
 #include "view.h"
