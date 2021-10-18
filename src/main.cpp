@@ -1,7 +1,5 @@
 #include "../include/controller.h"
 
-#include <iostream>
-
 Game::Game(Mode mode) 
     : m_model(mode, COLS, ROWS), m_view(NAME, COLS, ROWS, ZOOM, WAIT) {
         this->loop();
