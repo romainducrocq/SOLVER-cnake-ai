@@ -13,7 +13,7 @@ class Game{
     public:
         Game();
 
-        int get_action();
+        int get_action_play();
 
         void act(int action);
 
