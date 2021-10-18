@@ -26,10 +26,10 @@ void Snake::update_size(){
 }
 
 void Snake::update_body(){
-    for(size_t i = 0; i < this->m_body.size() - 1; i++){
-        this->m_body[i] = this->m_body[i+1];
+    for(size_t i = this->m_body.size() - 1; i > 0; i--){
+        this->m_body[i] = this->m_body[i-1];
     }
-    this->m_body[this->m_body.size() - 1] = Vector2i(this->m_pos.x, this->m_pos.y);
+    this->m_body[0] = Vector2i(this->m_pos.x, this->m_pos.y);
 }
 
 void Snake::update_pos(){
@@ -56,7 +56,7 @@ bool Snake::is_hit() const {
         return true;
     }
 
-    for(size_t i = 0; i < this->m_body.size() - 1; i++){
+    for(size_t i = 1; i < this->m_body.size(); i++){
         if(this->m_body[i].x == this->m_pos.x && this->m_body[i].y == this->m_pos.y){
             return true;
         }

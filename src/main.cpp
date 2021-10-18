@@ -40,21 +40,21 @@ int Game::get_action(){
 void Game::loop(){
     while(true){
         this->act(this->get_action());
+
         this->m_model.m_snake.update_pos();
-
-        if(this->m_model.m_snake.is_hit()){
-            this->m_view.wait_exit();
-            break;
-        }
-
-        this->m_model.m_snake.update_body();
         if(this->m_model.m_snake.is_eat(
             this->m_model.m_apple.get_pos())
         ){
             this->m_model.m_apple.update_pos();
             this->m_model.m_snake.update_size();
         }
+        this->m_model.m_snake.update_body();
         
+        if(this->m_model.m_snake.is_hit()){
+            this->m_view.wait_exit();
+            break;
+        }
+
         if(!(this->m_view.loop(this->m_model))){
             break;
         }
