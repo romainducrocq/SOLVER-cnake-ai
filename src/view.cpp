@@ -9,6 +9,55 @@ View::View(std::string name, float wait, int cols, int rows, int zoom)
     this->m_window.setVerticalSyncEnabled(true);
 }
 
+/***
+ * INPUTS
+ * 
+ */
+
+void View::handle_input_key_cont(sf::Event event, std::map<sf::Keyboard::Key,bool>& inputs){
+    if(event.type == sf::Event::KeyPressed){
+        for (std::map<sf::Keyboard::Key,bool>::iterator it=inputs.begin(); it!=inputs.end(); ++it){
+            if(event.key.code == it->first){
+                it->second = true;
+            }
+        }
+    }else if(event.type == sf::Event::KeyReleased){
+        for (std::map<sf::Keyboard::Key,bool>::iterator it=inputs.begin(); it!=inputs.end(); ++it){
+            if(event.key.code == it->first){
+                it->second = false;
+            }
+        }
+    }
+}
+
+void View::handle_input_key_disc(sf::Event event, std::map<sf::Keyboard::Key,bool>& inputs){
+    if(event.type == sf::Event::KeyReleased){
+        for (std::map<sf::Keyboard::Key,bool>::iterator it=inputs.begin(); it!=inputs.end(); ++it){
+            if(event.key.code == it->first){
+                it->second = !it->second;
+            }
+        }
+    }
+}
+
+void View::handle_input_all(sf::Event event, sf::RenderWindow& window){
+    if(event.type == sf::Event::Closed){
+        window.close();
+    }
+
+    this->handle_input_key_cont(event, this->m_ctrl_inputs);
+    this->handle_input_key_disc(event, this->m_view_inputs);
+}
+
+bool View::is_wait(){
+    return this->m_view_inputs[sf::Keyboard::Space];
+}
+
+/***
+ * SHAPES 
+ * 
+ */
+
 void View::draw_circle_shape(sf::CircleShape& circle_shape, float position_x, float position_y,
                             int outline_thickness, sf::Color fill_color, sf::Color outline_color){
     circle_shape.setPosition(sf::Vector2f(position_x, position_y));
@@ -27,9 +76,14 @@ void View::draw_rectangle_shape(sf::RectangleShape& rectangle_shape, float posit
     this->m_window.draw(rectangle_shape);
 }
 
+/***
+ * 
+ * 
+ */
+
 int View::get_ctrl_input() {
     int i = 1;
-    for (std::map<int,int>::iterator it=this->m_ctrl_inputs.begin(); it!=this->m_ctrl_inputs.end(); ++it, ++i){
+    for (std::map<sf::Keyboard::Key,bool>::iterator it=this->m_ctrl_inputs.begin(); it!=this->m_ctrl_inputs.end(); ++it, ++i){
         if(it->second == true){
             return i;
         }
@@ -37,23 +91,10 @@ int View::get_ctrl_input() {
     return 0;
 }
 
-void View::handle_input(sf::Event event, sf::RenderWindow& window){
-    if(event.type == sf::Event::Closed){
-        window.close();
-    }
-
-    if(event.type == sf::Event::KeyPressed){
-        for (std::map<int,int>::iterator it=this->m_ctrl_inputs.begin(); it!=this->m_ctrl_inputs.end(); ++it){
-            if(event.key.code == it->first){
-                it->second = true;
-            }
-        }
-    }else if(event.type == sf::Event::KeyReleased){
-        for (std::map<int,int>::iterator it=this->m_ctrl_inputs.begin(); it!=this->m_ctrl_inputs.end(); ++it){
-            if(event.key.code == it->first){
-                it->second = false;
-            }
-        }
+void View::frame_rate(){
+    if(this->is_wait()){
+        while(this->m_clock.getElapsedTime().asSeconds() <= this->m_wait) {}
+        this->m_clock.restart();
     }
 }
 
@@ -68,7 +109,7 @@ void View::wait_exit(){
 }
 
 /***
- * 
+ *
  * 
  */
 
@@ -83,13 +124,12 @@ void View::loop(){
 
         sf::Event event;
         while(this->m_window.pollEvent(event)){
-            this->handle_input(event, this->m_window);
+            this->handle_input_all(event, this->m_window);
         }
         this->m_window.clear(sf::Color(51, 51, 51));
         this->view_loop();
         this->m_window.display();
         
-        while(this->m_clock.getElapsedTime().asSeconds() <= this->m_wait) {}
-        this->m_clock.restart();
+        this->frame_rate();
     }
 }

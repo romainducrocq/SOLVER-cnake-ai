@@ -11,6 +11,7 @@ class Apple{
         Vector2i m_mat;
         Vector2i m_pos;
 
+    private:
         bool is_valid_pos(const std::vector<Vector2i>& body);
 
     public:

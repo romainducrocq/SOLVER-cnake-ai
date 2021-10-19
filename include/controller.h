@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <ctime>
 
+#include <SFML/Graphics.hpp>
+
 #include "utils.h"
 #include "model.h"
 #include "view.h"
@@ -12,7 +14,7 @@ class Game: public View{
     private:
         typedef View Super;
         Model m_model;
-
+        
         Mode m_mode;
 
     public:

@@ -8,18 +8,20 @@
 
 class View{
     private:
+        sf::RenderWindow m_window;
+        sf::Clock m_clock;
+
         std::string m_name;
         float m_wait;
         
-        std::map<int,int> m_ctrl_inputs = {
+        std::map<sf::Keyboard::Key,bool> m_ctrl_inputs = {
                 {sf::Keyboard::Left,  false}, // 1
                 {sf::Keyboard::Right, false}, // 2
                 {sf::Keyboard::Up,    false}, // 3
                 {sf::Keyboard::Down,  false}  // 4
-        }; 
-
-        sf::RenderWindow m_window;
-        sf::Clock m_clock;
+        }, m_view_inputs = {
+                {sf::Keyboard::Space,  true}
+        };
 
     protected:
         /*** 
@@ -30,14 +32,19 @@ class View{
         sf::CircleShape circle_shape_apple;
         std::vector<sf::RectangleShape> rectangle_shapes_snake;
 
+    private:
+        void handle_input_key_cont(sf::Event event, std::map<sf::Keyboard::Key,bool>& inputs);
+
+        void handle_input_key_disc(sf::Event event, std::map<sf::Keyboard::Key,bool>& inputs);
+        
+        void handle_input_all(sf::Event event, sf::RenderWindow& window);
+
+        bool is_wait();
+
+        void frame_rate();
+
     public:
         View(std::string name, float wait, int cols, int rows, int zoom);
-
-        void wait_exit();
-
-        int get_ctrl_input();
-
-        void handle_input(sf::Event event, sf::RenderWindow& window);
 
         void draw_circle_shape(sf::CircleShape& circle_shape, float position_x, float position_y,
                                int outline_thickness, sf::Color fill_color, sf::Color outline_color);
@@ -45,6 +52,9 @@ class View{
         void draw_rectangle_shape(sf::RectangleShape& rectangle_shape, float position_x, float position_y,
                                   int outline_thickness, sf::Color fill_color, sf::Color outline_color);
 
+        int get_ctrl_input();
+
+        void wait_exit();
 
         void setup();
 
