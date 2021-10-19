@@ -6,39 +6,36 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "model.h"
-
 class View{
     private:
         std::string m_name;
-        int m_cols, m_rows, m_width, m_height, m_zoom;
         float m_wait;
         
-        std::map<int,int> m_inputs = {
+        std::map<int,int> m_ctrl_inputs = {
                 {sf::Keyboard::Left,  false}, // 1
                 {sf::Keyboard::Right, false}, // 2
                 {sf::Keyboard::Up,    false}, // 3
                 {sf::Keyboard::Down,  false}  // 4
         }; 
 
-
         sf::RenderWindow m_window;
         sf::Clock m_clock;
 
-    private:
+    protected:
         /*** 
          * TODO
          * 
          */
+        int m_cols, m_rows, m_width, m_height, m_zoom;
         sf::CircleShape circle_shape_apple;
         std::vector<sf::RectangleShape> rectangle_shapes_snake;
 
     public:
-        View(std::string name, int cols, int rows, int zoom, float wait);
+        View(std::string name, float wait, int cols, int rows, int zoom);
 
         void wait_exit();
 
-        int get_input();
+        int get_ctrl_input();
 
         void handle_input(sf::Event event, sf::RenderWindow& window);
 
@@ -50,8 +47,16 @@ class View{
 
 
         void setup();
-        bool loop(const Model& model);
-        void draw(const Model& model);
+
+        void loop();
+
+        virtual void view_setup() = 0;
+        
+        virtual void view_loop() = 0;
+
+        virtual void ctrl_setup() = 0;
+        
+        virtual void ctrl_loop() = 0;
 };
 
 #endif

@@ -1,7 +1,8 @@
 #include "../include/controller.h"
 
 Game::Game(Mode mode) 
-    : m_model(mode, COLS, ROWS), m_view(NAME, COLS, ROWS, ZOOM, WAIT) {
+    : Super(NAME, WAIT, COLS, ROWS, ZOOM), m_model(COLS, ROWS), m_mode(mode){
+        this->setup();
         this->loop();
     } 
 
@@ -25,41 +26,75 @@ void Game::act(int action){
 }
 
 int Game::get_action(){
-    switch (this->m_model.m_mode){
+    switch (this->m_mode){
     case Mode::AGENT:
         return 0;
     case Mode::PLAYER:
-        return this->m_view.get_input();
+        return this->Super::get_ctrl_input();
     default:
         return 0;
     }
 }
 
-void Game::loop(){
-    while(true){
-        this->act(this->get_action());
+/***
+ * VIEW
+ * 
+ */
 
-        this->m_model.m_snake.update_pos();
-        if(this->m_model.m_snake.is_eat(
-            this->m_model.m_apple.get_pos()
-        )){
-            this->m_model.m_snake.update_size();
-            this->m_model.m_apple.update_pos(
-                this->m_model.m_snake.get_body()
-            );
-        }
-        this->m_model.m_snake.update_body();
-        
-        if(this->m_model.m_snake.is_hit()){
-            this->m_view.wait_exit();
-            break;
-        }
+void Game::view_setup(){
+    this->Super::circle_shape_apple = sf::CircleShape(Super::m_zoom / 2);
+    this->Super::rectangle_shapes_snake.push_back(sf::RectangleShape(sf::Vector2f(Super::m_zoom, Super::m_zoom)));
+}
 
-        if(!(this->m_view.loop(this->m_model))){
-            break;
-        }
+void Game::view_loop(){
+    this->Super::draw_circle_shape(this->Super::circle_shape_apple, 
+                                   this->m_model.m_apple.get_pos().x * Super::m_zoom, 
+                                   this->m_model.m_apple.get_pos().y * Super::m_zoom, 
+                                   1, sf::Color(255, 0, 100), sf::Color(0, 0, 0));
+
+    while(this->m_model.m_snake.get_body().size() > this->Super::rectangle_shapes_snake.size()){
+        this->Super::rectangle_shapes_snake.push_back(sf::RectangleShape(sf::Vector2f(Super::m_zoom, Super::m_zoom)));
+    }
+
+    for(size_t i = 0; i < this->m_model.m_snake.get_body().size(); i++){
+            this->draw_rectangle_shape(this->Super::rectangle_shapes_snake[i], 
+                                       this->m_model.m_snake.get_body()[i].x * Super::m_zoom, 
+                                       this->m_model.m_snake.get_body()[i].y * Super::m_zoom,
+                                       1, sf::Color(58, 191, 39), sf::Color(0, 0, 0));
     }
 }
+
+/***
+ * CONTROLLER
+ * 
+ */
+
+void Game::ctrl_setup(){
+
+}
+
+void Game::ctrl_loop(){
+    this->act(this->get_action());
+
+    this->m_model.m_snake.update_pos();
+    if(this->m_model.m_snake.is_eat(
+        this->m_model.m_apple.get_pos()
+    )){
+        this->m_model.m_snake.update_size();
+        this->m_model.m_apple.update_pos(
+            this->m_model.m_snake.get_body()
+        );
+    }
+    this->m_model.m_snake.update_body();
+    
+    if(this->m_model.m_snake.is_hit()){
+        this->Super::wait_exit();
+    }
+}
+
+/***
+ * 
+ */
 
 int main(){
     std::srand(time(nullptr));
