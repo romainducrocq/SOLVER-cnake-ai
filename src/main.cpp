@@ -98,5 +98,19 @@ void Game::ctrl_loop(){
 
 int main(){
     std::srand(time(nullptr));
+
+    /***
+     * 
+     * 
+     */
+
+    HamiltonianCycle hc(COLS, ROWS);
+    //return 0;
+
+    /***
+     * 
+     * 
+     */
+
     Game game(Mode::PLAYER);
 }

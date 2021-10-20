@@ -5,8 +5,8 @@
 
 enum Mode{ AGENT, PLAYER };
 
-static const int COLS = 30; // 128;
-static const int ROWS = 30; // 64;
+static const int COLS = 30; // 64;
+static const int ROWS = COLS; // 64;
 static const int ZOOM = 20; // 15;
 static const float WAIT = 0.06f; // 0.0f;
 static const std::string NAME = "SNAKE";
@@ -19,6 +19,10 @@ struct Vector2i{
 
     Vector2i(int x, int y)
         : x(x), y(y) {}
+
+    bool operator <(const Vector2i& o) const{
+        return (x < o.x) || ((!(o.x < x)) && (y < o.y));
+    }
 };
 
 #endif
