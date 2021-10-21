@@ -29,7 +29,7 @@ class View{
          * 
          */
         int m_cols, m_rows, m_width, m_height, m_zoom;
-        sf::ConvexShape convex_shape_hc;
+        sf::ConvexShape convex_shape_hcycle;
         sf::CircleShape circle_shape_apple;
         std::vector<sf::RectangleShape> rectangle_shapes_snake;
 

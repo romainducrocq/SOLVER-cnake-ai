@@ -42,11 +42,11 @@ int Game::get_action(){
  */
 
 void Game::view_setup(){
-    this->Super::convex_shape_hc.setPointCount(this->Super::m_cols * this->Super::m_rows);
+    this->Super::convex_shape_hcycle.setPointCount(this->Super::m_cols * this->Super::m_rows);
     for(int i = 0; i < this->Super::m_cols * this->Super::m_rows; i++){
-        this->Super::convex_shape_hc.setPoint(i, sf::Vector2f(
-            (this->m_model.m_hc.get_hc()[i] % this->Super::m_cols) * this->Super::m_zoom,
-            (this->m_model.m_hc.get_hc()[i] / this->Super::m_cols) * this->Super::m_zoom
+        this->Super::convex_shape_hcycle.setPoint(i, sf::Vector2f(
+            (this->m_model.m_hcycle.get_hcycle()[i] % this->Super::m_cols) * this->Super::m_zoom,
+            (this->m_model.m_hcycle.get_hcycle()[i] / this->Super::m_cols) * this->Super::m_zoom
         ));
     }
 
@@ -55,7 +55,7 @@ void Game::view_setup(){
 }
 
 void Game::view_loop(){
-    this->Super::draw_convex_shape(this->Super::convex_shape_hc, 
+    this->Super::draw_convex_shape(this->Super::convex_shape_hcycle, 
                                    this->Super::m_zoom / 2, 
                                    this->Super::m_zoom / 2, 
                                    1, sf::Color(51, 51, 51), sf::Color(0, 0, 255, 100)); 

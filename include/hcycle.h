@@ -20,28 +20,28 @@ class HamiltonianCycle{
         int m_cols, m_rows;
 
         // prim maze generator
-        bool* m_cells;
-        std::set<Vector2i> m_walls;
-        std::vector<int>* m_maze;
+        bool* m_pcells;
+        std::set<Vector2i> m_pwalls;
+        std::vector<int>* m_pmaze;
 
         // hamiltionian cycle
-        int* m_cycle;
+        int* m_hcycle;
 
     private:
         // prim maze generator
-        void prim_adj_walls(int cell);
+        void pmaze_adj_pwalls(int pcell);
 
-        void prim_algorithm();
+        void pmaze_gen_alg();
 
         // hamiltonian cycle
-        void hc_algorithm();
+        void hcycle_gen_alg();
 
     public:
         HamiltonianCycle(int cols, int rows);
 
         ~HamiltonianCycle();
 
-        const int* get_hc() const;
+        const int* get_hcycle() const;
 
     /***
      * TEST
