@@ -43,9 +43,17 @@ class HamiltonianCycle: public PrimMazeGenerator{
         typedef PrimMazeGenerator Super;
 
         int m_cols, m_rows;
+        int* m_cycle;
+
+        int get_up_left(int i);
+        int get_up_right(int i);
+        int get_down_left(int i);
+        int get_down_right(int i);
 
     public:
         HamiltonianCycle(int cols, int rows);
+
+        ~HamiltonianCycle();
 };
 
 #endif

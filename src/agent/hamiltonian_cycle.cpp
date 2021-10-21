@@ -41,7 +41,7 @@ void PrimMazeGenerator::add_adj_walls(int cell){
     if(cell >= this->m_scols){                     //up
         this->m_walls.insert(Vector2i(cell - this->m_scols, cell));
     }
-    if(cell < (this->m_scols - 1) * this->m_srows){ //down
+    if(cell < (this->m_srows- 1) * this->m_scols){ //down
         this->m_walls.insert(Vector2i(cell, cell + this->m_scols));
     }
 }
@@ -148,4 +148,26 @@ void PrimMazeGenerator::test(){
  */ 
 
 HamiltonianCycle::HamiltonianCycle(int cols, int rows)
-    : Super(cols, rows), m_cols(cols), m_rows(rows){}
+    : Super(cols, rows), m_cols(cols), m_rows(rows){
+    this->m_cycle = new int[this->m_cols * this->m_rows];
+}
+
+HamiltonianCycle::~HamiltonianCycle(){
+    delete[] this->m_cycle;
+}
+
+int HamiltonianCycle::get_up_left(int i){
+    return i * 2;
+}
+
+int HamiltonianCycle::get_up_right(int i){
+    return i * 2 + 1;
+}
+
+int HamiltonianCycle::get_down_left(int i){
+    return (i * 2) + this->m_cols;
+}
+
+int HamiltonianCycle::get_down_right(int i){
+    return (i * 2) + this->m_cols + 1;
+}
