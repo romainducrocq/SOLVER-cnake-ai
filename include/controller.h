@@ -15,7 +15,7 @@
  * 
  */
 
-#include "agent/hamiltonian_cycle.h"
+#include "hamiltonian_cycle.h"
 
 /***
  * 
