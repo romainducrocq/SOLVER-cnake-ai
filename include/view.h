@@ -29,6 +29,7 @@ class View{
          * 
          */
         int m_cols, m_rows, m_width, m_height, m_zoom;
+        sf::ConvexShape convex_shape_hc;
         sf::CircleShape circle_shape_apple;
         std::vector<sf::RectangleShape> rectangle_shapes_snake;
 
@@ -45,6 +46,9 @@ class View{
 
     public:
         View(std::string name, float wait, int cols, int rows, int zoom);
+
+        void draw_convex_shape(sf::ConvexShape& convex_shape, float position_x, float position_y,
+                               int outline_thickness, sf::Color fill_color, sf::Color outline_color);
 
         void draw_circle_shape(sf::CircleShape& circle_shape, float position_x, float position_y,
                                int outline_thickness, sf::Color fill_color, sf::Color outline_color);

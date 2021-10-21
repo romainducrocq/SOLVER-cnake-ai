@@ -41,15 +41,13 @@ class HamiltonianCycle{
 
         ~HamiltonianCycle();
 
+        const int* get_hc() const;
+
     /***
      * TEST
      * 
      */
     public:
-        /*
-        void print_visited();
-        void print_edges();
-        */
         void print_pmaze();
         void print_hcycle();
         void debug();

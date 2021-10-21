@@ -132,32 +132,14 @@ void HamiltonianCycle::hc_algorithm(){
     }while(count < this->m_cols * this->m_rows);
 }
 
+const int* HamiltonianCycle::get_hc() const{
+    return this->m_cycle;
+}
+
 /***
  * TEST
  * 
  */
-
-/*
-void HamiltonianCycle::print_visited(){
-    std::cout << "\nVisited:\n";
-    for(int i = 0; i < (this->m_rows / 2); i++){
-        for(int j = 0; j < (this->m_cols / 2); j++){
-            std::cout << "(" << i << ", " << j << ") = " << this->m_cells[i * (this->m_cols / 2) + j] << "\n";
-        }
-    }
-}
-
-void HamiltonianCycle::print_edges(){
-    std::cout << "\nEdges:\n";
-    for(int i = 0; i < (this->m_cols / 2) * (this->m_rows / 2); i++){
-        std::cout << i << " -> ";
-        for(const auto& e: this->m_maze[i]){
-            std::cout << e << " ";
-        }
-        std::cout << "\n";
-    }
-}
-*/
 
 void HamiltonianCycle::print_pmaze(){
     std::cout << "\nMaze:\n";
@@ -192,10 +174,6 @@ void HamiltonianCycle::print_hcycle(){
 }
 
 void HamiltonianCycle::debug(){
-    /*
-    this->print_visited();
-    this->print_edges();
-    */
     this->print_pmaze();
     this->print_hcycle();
 }

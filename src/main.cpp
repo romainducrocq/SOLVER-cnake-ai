@@ -42,11 +42,24 @@ int Game::get_action(){
  */
 
 void Game::view_setup(){
+    this->Super::convex_shape_hc.setPointCount(this->Super::m_cols * this->Super::m_rows);
+    for(int i = 0; i < this->Super::m_cols * this->Super::m_rows; i++){
+        this->Super::convex_shape_hc.setPoint(i, sf::Vector2f(
+            (this->m_model.m_hc.get_hc()[i] % this->Super::m_cols) * this->Super::m_zoom,
+            (this->m_model.m_hc.get_hc()[i] / this->Super::m_cols) * this->Super::m_zoom
+        ));
+    }
+
     this->Super::circle_shape_apple = sf::CircleShape(Super::m_zoom / 2);
     this->Super::rectangle_shapes_snake.push_back(sf::RectangleShape(sf::Vector2f(Super::m_zoom, Super::m_zoom)));
 }
 
 void Game::view_loop(){
+    this->Super::draw_convex_shape(this->Super::convex_shape_hc, 
+                                   this->Super::m_zoom / 2, 
+                                   this->Super::m_zoom / 2, 
+                                   1, sf::Color(51, 51, 51), sf::Color(0, 0, 255, 100)); 
+
     this->Super::draw_circle_shape(this->Super::circle_shape_apple, 
                                    this->m_model.m_apple.get_pos().x * Super::m_zoom, 
                                    this->m_model.m_apple.get_pos().y * Super::m_zoom, 
@@ -70,7 +83,7 @@ void Game::view_loop(){
  */
 
 void Game::ctrl_setup(){
-
+    
 }
 
 void Game::ctrl_loop(){
@@ -98,20 +111,6 @@ void Game::ctrl_loop(){
 
 int main(){
     std::srand(time(nullptr));
-
-    /***
-     * 
-     * 
-     */
-
-    HamiltonianCycle hc(COLS, ROWS);
-    hc.debug();
-    return 0;
-
-    /***
-     * 
-     * 
-     */
 
     Game game(Mode::PLAYER);
 }

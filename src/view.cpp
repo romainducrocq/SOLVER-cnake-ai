@@ -58,6 +58,15 @@ bool View::is_wait(){
  * 
  */
 
+void View::draw_convex_shape(sf::ConvexShape& convex_shape, float position_x, float position_y,
+                            int outline_thickness, sf::Color fill_color, sf::Color outline_color){
+    convex_shape.setPosition(sf::Vector2f(position_x, position_y));
+    convex_shape.setOutlineThickness(outline_thickness);
+    convex_shape.setFillColor(fill_color);
+    convex_shape.setOutlineColor(outline_color);
+    this->m_window.draw(convex_shape);
+}
+
 void View::draw_circle_shape(sf::CircleShape& circle_shape, float position_x, float position_y,
                             int outline_thickness, sf::Color fill_color, sf::Color outline_color){
     circle_shape.setPosition(sf::Vector2f(position_x, position_y));

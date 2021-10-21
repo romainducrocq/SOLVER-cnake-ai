@@ -10,18 +10,6 @@
 #include "model.h"
 #include "view.h"
 
-/***
- * 
- * 
- */
-
-#include "hamiltonian_cycle.h"
-
-/***
- * 
- * 
- */
-
 class Game: public View{
     private:
         typedef View Super;
