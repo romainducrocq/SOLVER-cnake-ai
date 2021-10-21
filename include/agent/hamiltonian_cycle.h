@@ -9,6 +9,11 @@
 
 #include "../utils.h"
 
+template<typename T>
+bool v_contains(const std::vector<T>& v, T i){
+    return std::find(v.begin(), v.end(), i) != v.end();
+}
+
 class PrimMazeGenerator{
     private:
         int m_scols, m_srows;
@@ -16,16 +21,6 @@ class PrimMazeGenerator{
         std::set<Vector2i> m_walls;
 
         void add_adj_walls(int cell);
-
-        /***
-         * TEST
-         * 
-         */
-        void test();
-        void print_visited();
-        void print_edges();
-        void print_maze();
-        /**/
 
     protected:
         std::vector<int>* m_maze;
@@ -36,6 +31,17 @@ class PrimMazeGenerator{
         ~PrimMazeGenerator();
 
         void prim_algorithm();
+
+    /***
+     * TEST
+     * 
+     */
+    public:
+        void print_visited();
+        void print_edges();
+        void print_maze();
+    /**/
+
 };
 
 class HamiltonianCycle: public PrimMazeGenerator{
@@ -45,15 +51,22 @@ class HamiltonianCycle: public PrimMazeGenerator{
         int m_cols, m_rows;
         int* m_cycle;
 
-        int get_up_left(int i);
-        int get_up_right(int i);
-        int get_down_left(int i);
-        int get_down_right(int i);
-
     public:
         HamiltonianCycle(int cols, int rows);
 
         ~HamiltonianCycle();
+
+        void hc_algorithm();
+
+    /***
+     * TEST
+     * 
+     */
+    public:
+        void print_cycle();
+        void test();
+     /**/
+
 };
 
 #endif

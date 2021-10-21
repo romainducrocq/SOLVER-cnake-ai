@@ -15,15 +15,6 @@ PrimMazeGenerator::PrimMazeGenerator(int cols, int rows)
     this->m_maze = new std::vector<int>[this->m_scols * this->m_srows];
 
     this->prim_algorithm();
-
-    /***
-     *  TEST 
-     * 
-     * */
-
-    this->test();
-
-    /**/
 }
 
 PrimMazeGenerator::~PrimMazeGenerator(){
@@ -84,6 +75,61 @@ void PrimMazeGenerator::prim_algorithm(){
 }
 
 /***
+ * HAMILTONIAN CYCLE
+ * 
+ */ 
+
+HamiltonianCycle::HamiltonianCycle(int cols, int rows)
+    : Super(cols, rows), m_cols(cols), m_rows(rows){
+    this->m_cycle = new int[this->m_cols * this->m_rows];
+
+    this->hc_algorithm();
+}
+
+HamiltonianCycle::~HamiltonianCycle(){
+    delete[] this->m_cycle;
+}
+
+void HamiltonianCycle::hc_algorithm(){
+    int cell = 0, dir = 0, count = 0;
+
+    do{
+        this->m_cycle[count] = cell;
+        count++;
+
+        int next;
+        int scell = ((cell / this->m_cols) / 2) * (this->m_cols / 2) + ((cell % this->m_cols) / 2);
+        for(int i = 0; i < 3; i++){
+            if(i == 0){ next = (dir + 3) % 4; }
+            else if(i == 1){ next = (dir + 4) % 4; }
+            else if(i == 2){ next = (dir + 5) % 4; }
+
+            if(next == 0 && ((cell / this->m_cols) % 2 == 1 || v_contains(this->m_maze[scell], scell - (this->m_cols / 2)))){       // up
+                cell -= this->m_cols; 
+                dir = 0;
+                break;
+
+            }else if(next == 1 && (cell % 2 == 0 || v_contains(this->m_maze[scell], scell + 1))){                                   // right
+                cell += 1; 
+                dir = 1;
+                break;
+
+            }else if(next == 2 && ((cell / this->m_cols) % 2 == 0 || v_contains(this->m_maze[scell], scell + (this->m_cols / 2)))){ // down
+                cell += this->m_cols; 
+                dir = 2;
+                break;
+
+            }else if(next == 3 && (cell % 2 == 1 || v_contains(this->m_maze[scell], scell - 1))){                                   // left
+                cell -= 1; 
+                dir = 3;
+                break;
+
+            }
+        }
+    }while(count < this->m_cols * this->m_rows);
+}
+
+/***
  * TEST
  * 
  */
@@ -117,14 +163,12 @@ void PrimMazeGenerator::print_maze(){
     for(int i = 0; i < this->m_srows; i++){
         std::cout << "|";
         for(int j = 0; j < this->m_scols; j++){
-            if(std::find(this->m_maze[i * this->m_scols + j].begin(), this->m_maze[i * this->m_scols + j].end(), 
-                        ((i + 1) * this->m_scols + j)) != this->m_maze[i * this->m_scols + j].end()){
+            if(v_contains(this->m_maze[i * this->m_scols + j], (i + 1) * this->m_scols + j)){
                 std::cout << " "; 
             }else{
                 std::cout << "_"; 
             }
-            if(std::find(this->m_maze[i * this->m_scols + j].begin(), this->m_maze[i * this->m_scols + j].end(), 
-                        (i * this->m_scols + (j + 1))) != this->m_maze[i * this->m_scols + j].end()){
+            if(v_contains(this->m_maze[i * this->m_scols + j], i * this->m_scols + (j + 1))){
                 std::cout << " "; 
             }else{
                 std::cout << "|"; 
@@ -134,40 +178,19 @@ void PrimMazeGenerator::print_maze(){
     }
 }
 
-void PrimMazeGenerator::test(){
+void HamiltonianCycle::print_cycle(){
+    std::cout << "\nHamiltonian cycle:\n"; 
+    for(int i = 0; i < this->m_cols * this->m_rows; i++){
+        std::cout << this->m_cycle[i] << " ";
+    }
+    std::cout << "\n";
+}
+
+void HamiltonianCycle::test(){
     /*
-    this->print_visited();
-    this->print_edges();
+    this->Super::print_visited();
+    this->Super::print_edges();
     */
-    this->print_maze();
-}
-
-/***
- * HAMILTONIAN CYCLE
- * 
- */ 
-
-HamiltonianCycle::HamiltonianCycle(int cols, int rows)
-    : Super(cols, rows), m_cols(cols), m_rows(rows){
-    this->m_cycle = new int[this->m_cols * this->m_rows];
-}
-
-HamiltonianCycle::~HamiltonianCycle(){
-    delete[] this->m_cycle;
-}
-
-int HamiltonianCycle::get_up_left(int i){
-    return i * 2;
-}
-
-int HamiltonianCycle::get_up_right(int i){
-    return i * 2 + 1;
-}
-
-int HamiltonianCycle::get_down_left(int i){
-    return (i * 2) + this->m_cols;
-}
-
-int HamiltonianCycle::get_down_right(int i){
-    return (i * 2) + this->m_cols + 1;
+    this->Super::print_maze();
+    this->print_cycle();
 }

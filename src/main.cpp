@@ -105,7 +105,8 @@ int main(){
      */
 
     HamiltonianCycle hc(COLS, ROWS);
-    //return 0;
+    hc.test();
+    return 0;
 
     /***
      * 
