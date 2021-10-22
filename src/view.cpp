@@ -1,12 +1,12 @@
 #include "../include/view.h"
 
-View::View(std::string name, float wait, int cols, int rows, int zoom)
-    : m_name(name), m_wait(wait), m_cols(cols), m_rows(rows), m_width(cols * zoom), m_height(rows * zoom), m_zoom(zoom){
+View::View(std::string name, int cols, int rows, int zoom)
+    : m_cols(cols), m_rows(rows), m_zoom(zoom){
     sf::ContextSettings options;
-    options.antialiasingLevel = 8;
+    options.antialiasingLevel = 0;
 
-    this->m_window.create(sf::VideoMode(this->m_width, this->m_height, 32), this->m_name, sf::Style::Default, options);
-    this->m_window.setVerticalSyncEnabled(true);
+    this->m_window.create(sf::VideoMode(cols * zoom, rows * zoom, 32), name, sf::Style::Default, options);
+    this->m_window.setVerticalSyncEnabled(false);
 }
 
 /***
@@ -30,11 +30,11 @@ void View::handle_input_key_cont(sf::Event event, std::map<sf::Keyboard::Key,boo
     }
 }
 
-void View::handle_input_key_disc(sf::Event event, std::map<sf::Keyboard::Key,bool>& inputs){
+void View::handle_input_key_disc(sf::Event event, std::map<sf::Keyboard::Key,int>& inputs){
     if(event.type == sf::Event::KeyReleased){
-        for (std::map<sf::Keyboard::Key,bool>::iterator it=inputs.begin(); it!=inputs.end(); ++it){
+        for (std::map<sf::Keyboard::Key,int>::iterator it=inputs.begin(); it!=inputs.end(); ++it){
             if(event.key.code == it->first){
-                it->second = !it->second;
+                it->second++;
             }
         }
     }
@@ -47,10 +47,6 @@ void View::handle_input_all(sf::Event event, sf::RenderWindow& window){
 
     this->handle_input_key_cont(event, this->m_ctrl_inputs);
     this->handle_input_key_disc(event, this->m_view_inputs);
-}
-
-bool View::is_wait(){
-    return this->m_view_inputs[sf::Keyboard::Space];
 }
 
 /***
@@ -101,10 +97,23 @@ int View::get_ctrl_input() {
 }
 
 void View::frame_rate(){
-    if(this->is_wait()){
-        while(this->m_clock.getElapsedTime().asSeconds() <= this->m_wait) {}
-        this->m_clock.restart();
+    switch(this->m_view_inputs[sf::Keyboard::Space] % 3){
+    case 0:
+        this->m_window.setFramerateLimit(24);
+        break;
+    case 1:
+        this->m_window.setFramerateLimit(0);
+        this->m_window.setVerticalSyncEnabled(true);
+        break;
+    case 2:
+        this->m_window.setVerticalSyncEnabled(false);
+    default:
+        break;
     }
+}
+
+bool View::is_debug_view(){
+    return (this->m_view_inputs[sf::Keyboard::D] % 2);
 }
 
 void View::wait_exit(){

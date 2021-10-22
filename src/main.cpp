@@ -1,7 +1,7 @@
 #include "../include/controller.h"
 
 Game::Game(Mode mode) 
-    : Super(NAME, WAIT, COLS, ROWS, ZOOM), m_model(COLS, ROWS), m_mode(mode){
+    : Super(NAME, COLS, ROWS, ZOOM), m_model(COLS, ROWS), m_mode(mode){
     this->setup();
     this->loop();
 } 
@@ -57,10 +57,12 @@ void Game::view_setup(){
 }
 
 void Game::view_loop(){
-    this->Super::draw_convex_shape(this->Super::convex_shape_hcycle, 
-                                   this->Super::m_zoom / 2, 
-                                   this->Super::m_zoom / 2, 
-                                   1, sf::Color(51, 51, 51), sf::Color(0, 0, 255, 100)); 
+    if(this->Super::is_debug_view()){
+        this->Super::draw_convex_shape(this->Super::convex_shape_hcycle, 
+                                this->Super::m_zoom / 2, 
+                                this->Super::m_zoom / 2, 
+                                1, sf::Color(51, 51, 51), sf::Color(0, 0, 255, 100)); 
+    }
 
     this->Super::draw_circle_shape(this->Super::circle_shape_apple, 
                                    (this->m_model.m_apple.get_pos() % this->Super::m_cols) * Super::m_zoom, 
