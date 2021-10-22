@@ -13,7 +13,7 @@ class Agent{
     public:
         Agent(int cols, int rows);
 
-        int get_ctrl_input(int pos);
+        int get_action(int pos);
 };
 
 #endif
