@@ -17,9 +17,7 @@ class Game: public View{
         
         Mode m_mode;
 
-    public:
-        Game(Mode mode);
-
+    private:
         int get_action();
 
         void act(int action);
@@ -31,6 +29,9 @@ class Game: public View{
         void ctrl_setup() override;
         
         void ctrl_loop() override;
+
+    public:
+        Game(Mode mode);
 };
 
 #endif

@@ -44,9 +44,7 @@ class View{
 
         void frame_rate();
 
-    public:
-        View(std::string name, float wait, int cols, int rows, int zoom);
-
+    protected:
         void draw_convex_shape(sf::ConvexShape& convex_shape, float position_x, float position_y,
                                int outline_thickness, sf::Color fill_color, sf::Color outline_color);
 
@@ -71,6 +69,9 @@ class View{
         virtual void ctrl_setup() = 0;
         
         virtual void ctrl_loop() = 0;
+
+    public:
+        View(std::string name, float wait, int cols, int rows, int zoom);
 };
 
 #endif
