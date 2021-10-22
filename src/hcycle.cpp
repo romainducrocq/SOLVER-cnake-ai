@@ -20,16 +20,16 @@ HamiltonianCycle::~HamiltonianCycle(){
  */
 
 void HamiltonianCycle::add_pwalls(std::set<Vector2i>& pwalls, int pcell){
-    if(pcell % (this->m_cols / 2) != 0){                      //left
+    if(pcell % (this->m_cols / 2) != 0){                      // left
         pwalls.insert(Vector2i(pcell - 1, pcell));
     }
-    if((pcell + 1) % (this->m_cols / 2) != 0){                //right
+    if((pcell + 1) % (this->m_cols / 2) != 0){                // right
         pwalls.insert(Vector2i(pcell, pcell + 1));
     }
-    if(pcell >= (this->m_cols / 2)){                          //up
+    if(pcell >= (this->m_cols / 2)){                          // up
         pwalls.insert(Vector2i(pcell - (this->m_cols / 2), pcell));
     }
-    if(pcell < ((this->m_rows / 2)- 1) * (this->m_cols / 2)){ //down
+    if(pcell < ((this->m_rows / 2)- 1) * (this->m_cols / 2)){ // down
         pwalls.insert(Vector2i(pcell, pcell + (this->m_cols / 2)));
     }
 }
@@ -129,7 +129,7 @@ void HamiltonianCycle::hcycle_gen_alg(){
         }
     }while(hcount < this->m_cols * this->m_rows);
 
-    this->print_debug(pmaze);
+    // this->print_debug(pmaze);
     
     delete[] pmaze;
 }

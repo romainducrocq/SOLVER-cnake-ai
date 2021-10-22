@@ -8,16 +8,16 @@ Game::Game(Mode mode)
 
 void Game::act(int action){
     switch(action){
-    case 1: //left
+    case 1: // left
         this->m_model.m_snake.update_dir(Vector2i(-1, 0));
         break;
-    case 2: //right
+    case 2: // right
         this->m_model.m_snake.update_dir(Vector2i(1, 0));        
         break;
-    case 3: //up
+    case 3: // up
         this->m_model.m_snake.update_dir(Vector2i(0, -1));
         break;
-    case 4: //down
+    case 4: // down
         this->m_model.m_snake.update_dir(Vector2i(0, 1));
         break;
     default:
@@ -45,8 +45,8 @@ void Game::view_setup(){
     this->Super::convex_shape_hcycle.setPointCount(this->Super::m_cols * this->Super::m_rows);
     for(int i = 0; i < this->Super::m_cols * this->Super::m_rows; i++){
         this->Super::convex_shape_hcycle.setPoint(i, sf::Vector2f(
-            (this->m_model.m_hcycle.get_hcycle()[i] % this->Super::m_cols) * this->Super::m_zoom,
-            (this->m_model.m_hcycle.get_hcycle()[i] / this->Super::m_cols) * this->Super::m_zoom
+            (this->m_model.m_agent.m_hcycle.get_hcycle()[i] % this->Super::m_cols) * this->Super::m_zoom,
+            (this->m_model.m_agent.m_hcycle.get_hcycle()[i] / this->Super::m_cols) * this->Super::m_zoom
         ));
     }
 
