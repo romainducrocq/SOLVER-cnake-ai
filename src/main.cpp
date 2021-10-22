@@ -61,8 +61,8 @@ void Game::view_loop(){
                                    1, sf::Color(51, 51, 51), sf::Color(0, 0, 255, 100)); 
 
     this->Super::draw_circle_shape(this->Super::circle_shape_apple, 
-                                   this->m_model.m_apple.get_pos().x * Super::m_zoom, 
-                                   this->m_model.m_apple.get_pos().y * Super::m_zoom, 
+                                   (this->m_model.m_apple.get_pos() % this->Super::m_cols) * Super::m_zoom, 
+                                   (this->m_model.m_apple.get_pos() / this->Super::m_cols) * Super::m_zoom, 
                                    1, sf::Color(255, 0, 100), sf::Color(0, 0, 0));
 
     while(this->m_model.m_snake.get_body().size() > this->Super::rectangle_shapes_snake.size()){
@@ -71,8 +71,8 @@ void Game::view_loop(){
 
     for(size_t i = 0; i < this->m_model.m_snake.get_body().size(); i++){
             this->draw_rectangle_shape(this->Super::rectangle_shapes_snake[i], 
-                                       this->m_model.m_snake.get_body()[i].x * Super::m_zoom, 
-                                       this->m_model.m_snake.get_body()[i].y * Super::m_zoom,
+                                       (this->m_model.m_snake.get_body()[i] % this->Super::m_cols) * Super::m_zoom, 
+                                       (this->m_model.m_snake.get_body()[i] / this->Super::m_cols) * Super::m_zoom,
                                        1, sf::Color(58, 191, 39), sf::Color(0, 0, 0));
     }
 }
