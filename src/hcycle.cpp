@@ -138,10 +138,6 @@ const int* HamiltonianCycle::get_hcycle() const{
     return this->m_hcycle;
 }
 
-int HamiltonianCycle::get_next_pos(int pos){
-    return this->m_hcycle[(pos + 1) % (this->m_cols * this->m_rows)];
-}
-
 /***
  * TEST
  * 

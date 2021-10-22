@@ -40,8 +40,6 @@ class HamiltonianCycle{
         ~HamiltonianCycle();
 
         const int* get_hcycle() const;
-
-        int get_next_pos(int pos);
 };
 
 #endif

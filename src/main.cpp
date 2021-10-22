@@ -2,9 +2,9 @@
 
 Game::Game(Mode mode) 
     : Super(NAME, WAIT, COLS, ROWS, ZOOM), m_model(COLS, ROWS), m_mode(mode){
-        this->setup();
-        this->loop();
-    } 
+    this->setup();
+    this->loop();
+} 
 
 void Game::act(int action){
     switch(action){
@@ -28,7 +28,9 @@ void Game::act(int action){
 int Game::get_action(){
     switch (this->m_mode){
     case Mode::AGENT:
-        return 0;
+        return this->m_model.m_agent.get_action(
+            this->m_model.m_snake.get_body()[0]
+        );
     case Mode::PLAYER:
         return this->Super::get_ctrl_input();
     default:
@@ -112,5 +114,5 @@ void Game::ctrl_loop(){
 int main(){
     std::srand(time(nullptr));
 
-    Game game(Mode::PLAYER);
+    Game game(Mode::AGENT);
 }

@@ -5,13 +5,15 @@
 
 class Agent{
     private:
-        int m_cols, m_rows;
+        int m_cols, m_rows, m_count = 0;
 
     public:
         HamiltonianCycle m_hcycle;
 
     public:
         Agent(int cols, int rows);
+
+        int get_ctrl_input(int pos);
 };
 
 #endif
