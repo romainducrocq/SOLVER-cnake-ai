@@ -63,22 +63,38 @@ void View::draw_convex_shape(sf::ConvexShape& convex_shape, float position_x, fl
     this->m_window.draw(convex_shape);
 }
 
-void View::draw_circle_shape(sf::CircleShape& circle_shape, float position_x, float position_y,
-                            int outline_thickness, sf::Color fill_color, sf::Color outline_color){
-    circle_shape.setPosition(sf::Vector2f(position_x, position_y));
-    circle_shape.setOutlineThickness(outline_thickness);
-    circle_shape.setFillColor(fill_color);
-    circle_shape.setOutlineColor(outline_color);
-    this->m_window.draw(circle_shape);
+void View::draw_circle_shape(float radius, float position_x, float position_y,
+                             int outline_thickness, sf::Color fill_color, sf::Color outline_color,
+                             sf::CircleShape* circle_shape){
+    
+    bool ptr = circle_shape == nullptr;
+    if(ptr){ circle_shape = new sf::CircleShape(); }
+
+    circle_shape->setRadius(radius);
+    circle_shape->setPosition(sf::Vector2f(position_x, position_y));
+    circle_shape->setOutlineThickness(outline_thickness);
+    circle_shape->setFillColor(fill_color);
+    circle_shape->setOutlineColor(outline_color);
+    this->m_window.draw(*circle_shape);
+
+    if(ptr){ delete circle_shape; }
 }
 
-void View::draw_rectangle_shape(sf::RectangleShape& rectangle_shape, float position_x, float position_y,
-                                int outline_thickness, sf::Color fill_color, sf::Color outline_color){
-    rectangle_shape.setPosition(sf::Vector2f(position_x, position_y));
-    rectangle_shape.setOutlineThickness(outline_thickness);
-    rectangle_shape.setFillColor(fill_color);
-    rectangle_shape.setOutlineColor(outline_color);
-    this->m_window.draw(rectangle_shape);
+void View::draw_rectangle_shape(float size_x, float size_y, float position_x, float position_y,
+                                int outline_thickness, sf::Color fill_color, sf::Color outline_color,
+                                sf::RectangleShape* rectangle_shape){
+    
+    bool ptr = rectangle_shape == nullptr;
+    if(ptr){ rectangle_shape = new sf::RectangleShape(); }
+
+    rectangle_shape->setSize(sf::Vector2f(size_x, size_y));
+    rectangle_shape->setPosition(sf::Vector2f(position_x, position_y));
+    rectangle_shape->setOutlineThickness(outline_thickness);
+    rectangle_shape->setFillColor(fill_color);
+    rectangle_shape->setOutlineColor(outline_color);
+    this->m_window.draw(*rectangle_shape);
+
+    if(ptr){ delete rectangle_shape; }
 }
 
 /***

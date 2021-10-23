@@ -22,14 +22,12 @@ class View{
         };
 
     protected:
+        int m_cols, m_rows, m_zoom;
         /*** 
          * TODO
          * 
          */
-        int m_cols, m_rows, m_zoom;
-        sf::ConvexShape convex_shape_hcycle;
-        sf::CircleShape circle_shape_apple;
-        std::vector<sf::RectangleShape> rectangle_shapes_snake;
+        sf::ConvexShape m_convex_shape_hcycle;
 
     private:
         void handle_input_key_cont(sf::Event event, std::map<sf::Keyboard::Key,bool>& inputs);
@@ -44,11 +42,13 @@ class View{
         void draw_convex_shape(sf::ConvexShape& convex_shape, float position_x, float position_y,
                                int outline_thickness, sf::Color fill_color, sf::Color outline_color);
 
-        void draw_circle_shape(sf::CircleShape& circle_shape, float position_x, float position_y,
-                               int outline_thickness, sf::Color fill_color, sf::Color outline_color);
+        void draw_circle_shape(float radius, float position_x, float position_y,
+                               int outline_thickness, sf::Color fill_color, sf::Color outline_color,
+                               sf::CircleShape* circle_shape = nullptr);
 
-        void draw_rectangle_shape(sf::RectangleShape& rectangle_shape, float position_x, float position_y,
-                                  int outline_thickness, sf::Color fill_color, sf::Color outline_color);
+        void draw_rectangle_shape(float size_x, float size_y, float position_x, float position_y,
+                                  int outline_thickness, sf::Color fill_color, sf::Color outline_color,
+                                  sf::RectangleShape* rectangle_shape = nullptr);
 
         int get_ctrl_input();
 
