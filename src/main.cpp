@@ -59,7 +59,7 @@ void Game::view_loop(){
         this->Super::draw_convex_shape(this->Super::m_convex_shape_hcycle, 
                                 this->Super::m_zoom / 2, 
                                 this->Super::m_zoom / 2, 
-                                1, sf::Color(51, 51, 51), sf::Color(0, 0, 255, 100)); 
+                                1, sf::Color::Transparent, sf::Color(0, 0, 255, 100)); 
     }
 
     // draw apple
