@@ -66,13 +66,13 @@ void Game::view_loop(){
     this->Super::draw_circle_shape(Super::m_zoom * 0.4f, 
                                    (this->m_model.m_apple.get_pos() % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f, 
                                    (this->m_model.m_apple.get_pos() / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f, 
-                                   0, sf::Color(255, 0, 100), sf::Color(0, 0, 0));
+                                   0, sf::Color(255, 0, 100), sf::Color::Transparent);
 
     // draw snake
     this->Super::draw_circle_shape(Super::m_zoom * 0.4f,
                                    (this->m_model.m_snake.get_body()[0] % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f, 
                                    (this->m_model.m_snake.get_body()[0] / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
-                                   1, sf::Color(58, 191, 39), sf::Color(0, 0, 0));
+                                   0, sf::Color(58, 191, 39), sf::Color::Transparent);
 
     size_t i = 1;
     while (i < this->m_model.m_snake.get_body().size()){
