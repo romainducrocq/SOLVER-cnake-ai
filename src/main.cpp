@@ -57,57 +57,73 @@ void Game::view_loop(){
     if(this->Super::is_debug_view()){
         // draw hamiltonian cycle
         this->Super::draw_convex_shape(this->Super::m_convex_shape_hcycle, 
-                                this->Super::m_zoom / 2, 
-                                this->Super::m_zoom / 2, 
-                                1, sf::Color::Transparent, sf::Color(0, 0, 255, 100)); 
+                                       this->Super::m_zoom / 2, 
+                                       this->Super::m_zoom / 2, 
+                                       1, sf::Color::Transparent, sf::Color(0, 0, 255, 100)); 
     }
 
     // draw apple
-    this->Super::draw_circle_shape(Super::m_zoom * 0.8f / 2, 
+    this->Super::draw_circle_shape(Super::m_zoom * 0.4f, 
                                    (this->m_model.m_apple.get_pos() % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f, 
                                    (this->m_model.m_apple.get_pos() / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f, 
                                    0, sf::Color(255, 0, 100), sf::Color(0, 0, 0));
 
     // draw snake
-    for(size_t i = 0; i < this->m_model.m_snake.get_body().size(); i++){
-        this->Super::draw_circle_shape(Super::m_zoom * 0.8f / 2, 
-                                       (this->m_model.m_snake.get_body()[i] % this->Super::m_cols) * Super::m_zoom, 
-                                       (this->m_model.m_snake.get_body()[i] / this->Super::m_cols) * Super::m_zoom,
-                                       0, sf::Color(58, 191, 39), sf::Color(0, 0, 0));
-    } 
+    this->Super::draw_circle_shape(Super::m_zoom * 0.4f,
+                                   (this->m_model.m_snake.get_body()[0] % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f, 
+                                   (this->m_model.m_snake.get_body()[0] / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
+                                   1, sf::Color(58, 191, 39), sf::Color(0, 0, 0));
 
-    /*
-    this->draw_circle_shape(Super::m_zoom * 0.8f / 2,
-                            (this->m_model.m_snake.get_body()[0] % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f, 
-                            (this->m_model.m_snake.get_body()[0] / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
-                            1, sf::Color(58, 191, 39), sf::Color(0, 0, 0));
+    size_t i = 1;
+    while (i < this->m_model.m_snake.get_body().size()){
 
-    size_t j = 1;
-    while(j < this->m_model.m_snake.get_body().size()){
-        int i = j;
-        int dx = this->m_model.m_snake.get_body()[i] % this->Super::m_cols - this->m_model.m_snake.get_body()[i - 1] % this->Super::m_cols;
-        int dy = this->m_model.m_snake.get_body()[i] / this->Super::m_cols - this->m_model.m_snake.get_body()[i - 1] / this->Super::m_cols;
+        size_t j = 0;
+        while((i + j) < this->m_model.m_snake.get_body().size() && 
+              this->m_model.m_snake.get_body()[i] - this->m_model.m_snake.get_body()[i - 1] == 
+              this->m_model.m_snake.get_body()[i + j + 1] - this->m_model.m_snake.get_body()[i + j])
+        { j++; }
 
-        std::cout << dx << ", " << dy << "\n";
+        this->Super::draw_circle_shape(Super::m_zoom * 0.4f,
+                                       (this->m_model.m_snake.get_body()[i + j] % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f, 
+                                       (this->m_model.m_snake.get_body()[i + j] / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
+                                       0, sf::Color(58, 191, 39), sf::Color::Transparent);
 
-        while(true){            
-            if(j < this->m_model.m_snake.get_body().size() - 1){ break; }
-            if(!(
-                dx == this->m_model.m_snake.get_body()[j + 1] % this->Super::m_cols - this->m_model.m_snake.get_body()[j] % this->Super::m_cols &&
-                dy == this->m_model.m_snake.get_body()[j + 1] / this->Super::m_cols - this->m_model.m_snake.get_body()[j] / this->Super::m_cols
-            )){ break; }
-            std::cout << "hello" << "\n";
-            j++;
+        if(this->m_model.m_snake.get_body()[i] - this->m_model.m_snake.get_body()[i - 1] == 1){                          // left
+            this->Super::draw_rectangle_shape(((this->m_model.m_snake.get_body()[i + j] % this->Super::m_cols) -
+                                                (this->m_model.m_snake.get_body()[i - 1] % this->Super::m_cols)) * Super::m_zoom,
+                                              Super::m_zoom * 0.8f,
+                                              (this->m_model.m_snake.get_body()[i - 1] % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.5f,
+                                              (this->m_model.m_snake.get_body()[i - 1] / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
+                                              0, sf::Color(58, 191, 39), sf::Color::Transparent);
+        
+        }else if(this->m_model.m_snake.get_body()[i] - this->m_model.m_snake.get_body()[i - 1] == -1){                   // right
+            this->Super::draw_rectangle_shape(((this->m_model.m_snake.get_body()[i - 1] % this->Super::m_cols) - 
+                                                (this->m_model.m_snake.get_body()[i + j] % this->Super::m_cols)) * Super::m_zoom,
+                                              Super::m_zoom * 0.8f,
+                                              (this->m_model.m_snake.get_body()[i + j] % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.5f,
+                                              (this->m_model.m_snake.get_body()[i + j] / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
+                                              0, sf::Color(58, 191, 39), sf::Color::Transparent);
+
+        }else if(this->m_model.m_snake.get_body()[i] - this->m_model.m_snake.get_body()[i - 1] == this->Super::m_cols){  // up
+            this->Super::draw_rectangle_shape(Super::m_zoom * 0.8f,
+                                              ((this->m_model.m_snake.get_body()[i + j] / this->Super::m_cols) -
+                                                (this->m_model.m_snake.get_body()[i - 1] / this->Super::m_cols)) * Super::m_zoom,
+                                              (this->m_model.m_snake.get_body()[i - 1] % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
+                                              (this->m_model.m_snake.get_body()[i - 1] / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.5f,
+                                              0, sf::Color(58, 191, 39), sf::Color::Transparent);
+
+        }else if(this->m_model.m_snake.get_body()[i] - this->m_model.m_snake.get_body()[i - 1] == -this->Super::m_cols){ // down
+            this->Super::draw_rectangle_shape(Super::m_zoom * 0.8f,
+                                              ((this->m_model.m_snake.get_body()[i - 1] / this->Super::m_cols) -
+                                                (this->m_model.m_snake.get_body()[i + j] / this->Super::m_cols)) * Super::m_zoom,
+                                              (this->m_model.m_snake.get_body()[i + j] % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
+                                              (this->m_model.m_snake.get_body()[i + j] / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.5f,
+                                              0, sf::Color(58, 191, 39), sf::Color::Transparent);
+        
         }
 
-        this->draw_circle_shape(Super::m_zoom * 0.8f / 2,
-                                (this->m_model.m_snake.get_body()[j] % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f, 
-                                (this->m_model.m_snake.get_body()[j] / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
-                                1, sf::Color(58, 191, 39), sf::Color(0, 0, 0));
-        
-        j++;
+        i += (j + 1);
     }
-    */
 }
 
 /***

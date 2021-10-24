@@ -97,6 +97,15 @@ void View::draw_rectangle_shape(float size_x, float size_y, float position_x, fl
     if(ptr){ delete rectangle_shape; }
 }
 
+void View::draw_line_shape(float position_x1, float position_y1, float position_x2, float position_y2){
+        sf::Vertex line[] = {
+            sf::Vertex(sf::Vector2f(position_x1, position_y1)),
+            sf::Vertex(sf::Vector2f(position_x2, position_y2))
+        };
+
+        this->m_window.draw(line, 2, sf::Lines);
+}
+
 /***
  * 
  * 

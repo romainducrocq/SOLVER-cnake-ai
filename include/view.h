@@ -50,6 +50,8 @@ class View{
                                   int outline_thickness, sf::Color fill_color, sf::Color outline_color,
                                   sf::RectangleShape* rectangle_shape = nullptr);
 
+        void draw_line_shape(float position_x1, float position_y1, float position_x2, float position_y2);
+
         int get_ctrl_input();
 
         bool is_debug_view();
