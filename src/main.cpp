@@ -1,7 +1,7 @@
 #include "../include/controller.h"
 
-Game::Game(Mode mode) 
-    : Super(NAME, COLS, ROWS, ZOOM), m_model(COLS, ROWS), m_mode(mode){
+Game::Game(Mode mode, int cols, int rows, int zoom, std::string name) 
+    : Super(name, cols, rows, zoom), m_model(cols, rows), m_mode(mode){
     this->setup();
     this->loop();
 } 
@@ -156,10 +156,64 @@ void Game::ctrl_loop(){
 
 /***
  * 
+ * 
  */
 
-int main(){
+int main(int argc, char** argv){
     std::srand(time(nullptr));
+    
+    Args args;
 
-    Game game(Mode::AGENT);
+    for(;;){
+        switch(getopt(argc, argv, "hM:S:")){
+            case '?':
+            case 'h':
+            default :
+                std::cerr << "usage: app/exec [-h] [-M MODE] [-S SIZE]\n";
+                std::cerr << "\n";
+                std::cerr << args.name << "\n";
+                std::cerr << "\n";
+                std::cerr << "optional arguments:\n";
+                std::cerr << "  -h        show this help message and exit\n";
+                std::cerr << "  -M MODE   set mode   [a AGENT | p PLAYER]\n";
+                std::cerr << "  -S SIZE   set size   [s SMALL | l LARGE ]\n";
+
+                return -1;
+
+            case -1:
+                break;
+
+            case 'M': // MODE
+                switch(optarg[0]){
+                    case 'a': // agent 
+                        // default
+                        break;
+                    case 'p': // player
+                        args.mode = Mode::PLAYER;
+                        break;
+                    default:
+                        break;
+                }
+                continue;
+
+            case 'S': // SIZE
+                switch(optarg[0]){
+                    case 's': // small 
+                        // default                        
+                        break;
+                    case 'l': // large
+                        args.cols = 128;
+                        args.rows = 64;
+                        args.zoom = 15;  
+                        break;
+                    default:
+                        break;
+                }
+                continue;
+
+        }
+        break;
+    }
+
+    Game game(args.mode, args.cols, args.rows, args.zoom, args.name);
 }

@@ -7,10 +7,13 @@
 
 enum Mode{ AGENT, PLAYER };
 
-static const int COLS = 30; // 128;
-static const int ROWS = 30; // 64;
-static const int ZOOM = 20; // 15;
-static const std::string NAME = "SNAKE";
+struct Args {
+    Mode mode = Mode::AGENT;
+    int cols = 32;
+    int rows = 32;
+    int zoom = 20;
+    std::string name = "CNAKE++AI";
+};
 
 struct Timer{
     std::chrono::_V2::system_clock::time_point start, end;

@@ -1,6 +1,7 @@
 #ifndef _CONTROLLER_H
 #define _CONTROLLER_H
 
+#include <unistd.h>
 #include <cstdlib>
 #include <ctime>
 
@@ -31,7 +32,7 @@ class Game: public View{
         void ctrl_loop() override;
 
     public:
-        Game(Mode mode);
+        Game(Mode mode, int cols, int rows, int zoom, std::string name);
 };
 
 #endif
