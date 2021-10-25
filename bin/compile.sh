@@ -1,3 +1,4 @@
 #!/bin/sh
 
-cd ../build/out/ && make
+cd ../build/out/
+make
