@@ -4,4 +4,4 @@ args=""
 for ARG in $( echo "${@}" | sed 's/ / /g' ); \
 do args="${args} ${ARG}"; done
 
-cd app/ && eval "./exec${args}"
+cd app/ && ./exec${args}
