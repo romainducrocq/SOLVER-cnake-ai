@@ -28,6 +28,8 @@ class View{
          * 
          */
         sf::ConvexShape m_convex_shape_hcycle;
+        sf::CircleShape m_circle_shape;
+        sf::RectangleShape m_rectangle_shape;
 
     private:
         void handle_input_key_cont(sf::Event event, std::map<sf::Keyboard::Key,bool>& inputs);
