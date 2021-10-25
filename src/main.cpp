@@ -173,10 +173,14 @@ int main(int argc, char** argv){
                 std::cerr << "\n";
                 std::cerr << args.name << "\n";
                 std::cerr << "\n";
-                std::cerr << "optional arguments:\n";
+                std::cerr << "optional args:\n";
                 std::cerr << "  -h        show this help message and exit\n";
                 std::cerr << "  -M MODE   set mode   [a AGENT | p PLAYER]\n";
                 std::cerr << "  -S SIZE   set size   [s SMALL | l LARGE ]\n";
+                std::cerr << "\n";
+                std::cerr << "optional cmds:\n";
+                std::cerr << "  key SPACE set frate  [24FPS |VSYNC  |MAX]\n";
+                std::cerr << "  key D     set debug  [N       |Y        ]\n";
 
                 return -1;
 
