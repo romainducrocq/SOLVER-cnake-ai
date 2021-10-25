@@ -1,1 +1,2 @@
-cd bin && ./build.sh && ./compile.sh && ./run.sh
+cd bin  
+./build.sh [-R] && ./compile.sh && ./run.sh [-h]
