@@ -3,12 +3,11 @@
 
 #include "hcycle.h"
 
-class Agent{
+class Agent: public HamiltonianCycle{
     private:
-        int m_cols, m_rows, m_count = 0;
+        typedef HamiltonianCycle Super;
 
-    public:
-        HamiltonianCycle m_hcycle;
+        int m_count = 0;
 
     public:
         Agent(int cols, int rows);

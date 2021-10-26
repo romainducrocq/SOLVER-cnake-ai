@@ -47,8 +47,8 @@ void Game::view_setup(){
     this->Super::m_convex_shape_hcycle.setPointCount(this->Super::m_cols * this->Super::m_rows);
     for(int i = 0; i < this->Super::m_cols * this->Super::m_rows; i++){
         this->Super::m_convex_shape_hcycle.setPoint(i, sf::Vector2f(
-            (this->m_model.m_agent.m_hcycle.get_hcycle()[i] % this->Super::m_cols) * this->Super::m_zoom,
-            (this->m_model.m_agent.m_hcycle.get_hcycle()[i] / this->Super::m_cols) * this->Super::m_zoom
+            (this->m_model.m_agent.get_hcycle()[i] % this->Super::m_cols) * this->Super::m_zoom,
+            (this->m_model.m_agent.get_hcycle()[i] / this->Super::m_cols) * this->Super::m_zoom
         ));
     }
 }

@@ -17,7 +17,7 @@ bool v_contains(const std::vector<T>& v, T i){
 }
 
 class HamiltonianCycle{
-    private:
+    protected:
         int m_cols, m_rows;
 
         int* m_hcycle;
