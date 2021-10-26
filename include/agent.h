@@ -9,10 +9,16 @@ class Agent: public HamiltonianCycle{
 
         int m_count = 0;
 
+        int* m_unordered_hcycle;
+
     public:
         Agent(int cols, int rows);
+        
+        ~Agent();
 
         int get_action(int pos);
+
+        void perturbated_hcycle(int pos_s, int pos_a);
 };
 
 #endif
