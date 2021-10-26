@@ -11,6 +11,9 @@ class Agent: public HamiltonianCycle{
 
         int* m_unordered_hcycle;
 
+    private:
+        int perturbated_hcycle(int pos_h, int pos_t, int pos_a);
+
     public:
         Agent(int cols, int rows);
         
@@ -18,7 +21,7 @@ class Agent: public HamiltonianCycle{
 
         int get_action(int pos);
 
-        void perturbated_hcycle(int pos_s, int pos_a);
+        int get_action(int pos_h, int pos_t, int pos_a);
 };
 
 #endif

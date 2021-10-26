@@ -7,18 +7,6 @@ Agent::Agent(int cols, int rows)
     for(int i = 0; i < this->Super::m_cols * this->Super::m_rows; i++){
         this->m_unordered_hcycle[this->Super::m_hcycle[i]] = i;
     }
-
-    /* // debug
-    for(int i = 0; i < this->Super::m_rows; i++){
-        for(int j = 0; j < this->Super::m_cols; j++){
-            if(this->m_unordered_hcycle[i * this->Super::m_cols + j] < 10){ std::cout << "   "; }
-            else if(this->m_unordered_hcycle[i * this->Super::m_cols + j] < 100){ std::cout << "  "; }
-            else if(this->m_unordered_hcycle[i * this->Super::m_cols + j] < 1000){ std::cout << " "; }
-            std::cout <<  this->m_unordered_hcycle[i * this->Super::m_cols + j] << " ";
-        }
-        std::cout << "\n";
-    }
-    */
 }
 
 Agent::~Agent(){
@@ -36,6 +24,152 @@ int Agent::get_action(int pos){
     return 0;
 }
 
-void perturbated_hcycle(int pos_s, int pos_a){
-    // int dir;
+int Agent::get_action(int pos_h, int pos_t, int pos_a){
+    return this->perturbated_hcycle(pos_h, pos_t, pos_a);
+}
+
+int Agent::perturbated_hcycle(int pos_h, int pos_t, int pos_a){
+    int dir = 0, sc = 0;
+
+    if(pos_h % this->Super::m_cols != 0 && 
+       !(this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_t] &&
+         this->m_unordered_hcycle[pos_t] < this->m_unordered_hcycle[pos_h - 1]) && 
+       !(this->m_unordered_hcycle[pos_h - 1] < this->m_unordered_hcycle[pos_h] &&
+         this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_t]) &&
+       !(this->m_unordered_hcycle[pos_t] < this->m_unordered_hcycle[pos_h - 1] &&
+         this->m_unordered_hcycle[pos_h - 1] < this->m_unordered_hcycle[pos_h])
+    ){ // left
+        if(
+            this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_h - 1] &&
+            this->m_unordered_hcycle[pos_h - 1] <= this->m_unordered_hcycle[pos_a] &&
+            sc < this->m_unordered_hcycle[pos_h - 1] - this->m_unordered_hcycle[pos_h]
+        ){
+            sc = this->m_unordered_hcycle[pos_h - 1] - this->m_unordered_hcycle[pos_h];
+            dir = 1;
+
+        }else if(
+            this->m_unordered_hcycle[pos_a] < this->m_unordered_hcycle[pos_h] &&
+            this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_h - 1] &&
+            sc < this->m_unordered_hcycle[pos_h - 1] - this->m_unordered_hcycle[pos_h]
+        ){
+            sc = this->m_unordered_hcycle[pos_h - 1] - this->m_unordered_hcycle[pos_h];
+            dir = 1;
+
+        }else if(
+            this->m_unordered_hcycle[pos_h - 1] <= this->m_unordered_hcycle[pos_a] &&
+            this->m_unordered_hcycle[pos_a] < this->m_unordered_hcycle[pos_h] &&
+            sc < (this->Super::m_cols * this->Super::m_rows) - this->m_unordered_hcycle[pos_h] + this->m_unordered_hcycle[pos_h - 1]
+        ){
+            sc = (this->Super::m_cols * this->Super::m_rows) - this->m_unordered_hcycle[pos_h] + this->m_unordered_hcycle[pos_h - 1];
+            dir = 1;  
+
+        }
+    }
+
+    if((pos_h + 1) % this->Super::m_cols != 0 && 
+       !(this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_t] &&
+         this->m_unordered_hcycle[pos_t] < this->m_unordered_hcycle[pos_h + 1]) && 
+       !(this->m_unordered_hcycle[pos_h + 1] < this->m_unordered_hcycle[pos_h] &&
+         this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_t]) &&
+       !(this->m_unordered_hcycle[pos_t] < this->m_unordered_hcycle[pos_h + 1] &&
+         this->m_unordered_hcycle[pos_h + 1] < this->m_unordered_hcycle[pos_h])
+    ){ // right
+        if(
+            this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_h + 1] &&
+            this->m_unordered_hcycle[pos_h + 1] <= this->m_unordered_hcycle[pos_a] &&
+            sc < this->m_unordered_hcycle[pos_h + 1] - this->m_unordered_hcycle[pos_h]
+        ){
+            sc = this->m_unordered_hcycle[pos_h + 1] - this->m_unordered_hcycle[pos_h];
+            dir = 2;
+
+        }else if(
+            this->m_unordered_hcycle[pos_a] < this->m_unordered_hcycle[pos_h] &&
+            this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_h + 1] &&
+            sc < this->m_unordered_hcycle[pos_h + 1] - this->m_unordered_hcycle[pos_h]
+        ){
+            sc = this->m_unordered_hcycle[pos_h + 1] - this->m_unordered_hcycle[pos_h];
+            dir = 2;
+
+        }else if(
+            this->m_unordered_hcycle[pos_h + 1] <= this->m_unordered_hcycle[pos_a] &&
+            this->m_unordered_hcycle[pos_a] < this->m_unordered_hcycle[pos_h] &&
+            sc < (this->Super::m_cols * this->Super::m_rows) - this->m_unordered_hcycle[pos_h] + this->m_unordered_hcycle[pos_h + 1]
+        ){
+            sc = (this->Super::m_cols * this->Super::m_rows) - this->m_unordered_hcycle[pos_h] + this->m_unordered_hcycle[pos_h + 1];
+            dir = 2;  
+
+        }
+    }
+    
+    if(pos_h >= this->Super::m_cols && 
+       !(this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_t] &&
+         this->m_unordered_hcycle[pos_t] < this->m_unordered_hcycle[pos_h - this->Super::m_cols]) && 
+       !(this->m_unordered_hcycle[pos_h - this->Super::m_cols] < this->m_unordered_hcycle[pos_h] &&
+         this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_t]) &&
+       !(this->m_unordered_hcycle[pos_t] < this->m_unordered_hcycle[pos_h - this->Super::m_cols] &&
+         this->m_unordered_hcycle[pos_h - this->Super::m_cols] < this->m_unordered_hcycle[pos_h])
+    ){ // up
+        if(
+            this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_h - this->Super::m_cols] &&
+            this->m_unordered_hcycle[pos_h - this->Super::m_cols] <= this->m_unordered_hcycle[pos_a] &&
+            sc < this->m_unordered_hcycle[pos_h - this->Super::m_cols] - this->m_unordered_hcycle[pos_h]
+        ){
+            sc = this->m_unordered_hcycle[pos_h - this->Super::m_cols] - this->m_unordered_hcycle[pos_h];
+            dir = 3;
+
+        }else if(
+            this->m_unordered_hcycle[pos_a] < this->m_unordered_hcycle[pos_h] &&
+            this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_h - this->Super::m_cols] &&
+            sc < this->m_unordered_hcycle[pos_h - this->Super::m_cols] - this->m_unordered_hcycle[pos_h]
+        ){
+            sc = this->m_unordered_hcycle[pos_h - this->Super::m_cols] - this->m_unordered_hcycle[pos_h];
+            dir = 3;
+
+        }else if(
+            this->m_unordered_hcycle[pos_h - this->Super::m_cols] <= this->m_unordered_hcycle[pos_a] &&
+            this->m_unordered_hcycle[pos_a] < this->m_unordered_hcycle[pos_h] &&
+            sc < (this->Super::m_cols * this->Super::m_rows) - this->m_unordered_hcycle[pos_h] + this->m_unordered_hcycle[pos_h - this->Super::m_cols]
+        ){
+            sc = (this->Super::m_cols * this->Super::m_rows) - this->m_unordered_hcycle[pos_h] + this->m_unordered_hcycle[pos_h - this->Super::m_cols];
+            dir = 3;  
+
+        }
+    }
+    
+    if(pos_h < (this->Super::m_rows - 1) * this->Super::m_cols && 
+       !(this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_t] &&
+         this->m_unordered_hcycle[pos_t] < this->m_unordered_hcycle[pos_h + this->Super::m_cols]) && 
+       !(this->m_unordered_hcycle[pos_h + this->Super::m_cols] < this->m_unordered_hcycle[pos_h] &&
+         this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_t]) &&
+       !(this->m_unordered_hcycle[pos_t] < this->m_unordered_hcycle[pos_h + this->Super::m_cols] &&
+         this->m_unordered_hcycle[pos_h + this->Super::m_cols] < this->m_unordered_hcycle[pos_h])
+    ){ // down
+        if(
+            this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_h + this->Super::m_cols] &&
+            this->m_unordered_hcycle[pos_h + this->Super::m_cols] <= this->m_unordered_hcycle[pos_a] &&
+            sc < this->m_unordered_hcycle[pos_h + this->Super::m_cols] - this->m_unordered_hcycle[pos_h]
+        ){
+            // sc = this->m_unordered_hcycle[pos_h + this->Super::m_cols] - this->m_unordered_hcycle[pos_h];
+            dir = 4;
+
+        }else if(
+            this->m_unordered_hcycle[pos_a] < this->m_unordered_hcycle[pos_h] &&
+            this->m_unordered_hcycle[pos_h] < this->m_unordered_hcycle[pos_h + this->Super::m_cols] &&
+            sc < this->m_unordered_hcycle[pos_h + this->Super::m_cols] - this->m_unordered_hcycle[pos_h]
+        ){
+            // sc = this->m_unordered_hcycle[pos_h + this->Super::m_cols] - this->m_unordered_hcycle[pos_h];
+            dir = 4;
+
+        }else if(
+            this->m_unordered_hcycle[pos_h + this->Super::m_cols] <= this->m_unordered_hcycle[pos_a] &&
+            this->m_unordered_hcycle[pos_a] < this->m_unordered_hcycle[pos_h] &&
+            sc < (this->Super::m_cols * this->Super::m_rows) - this->m_unordered_hcycle[pos_h] + this->m_unordered_hcycle[pos_h + this->Super::m_cols]
+        ){
+            // sc = (this->Super::m_cols * this->Super::m_rows) - this->m_unordered_hcycle[pos_h] + this->m_unordered_hcycle[pos_h + this->Super::m_cols];
+            dir = 4;  
+
+        }
+    }
+
+    return dir;
 }

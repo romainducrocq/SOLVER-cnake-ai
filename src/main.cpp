@@ -29,7 +29,9 @@ int Game::get_action(){
     switch (this->m_mode){
     case Mode::AGENT:
         return this->m_model.m_agent.get_action(
-            this->m_model.m_snake.get_body()[0]
+            this->m_model.m_snake.get_body()[0],
+            this->m_model.m_snake.get_body()[this->m_model.m_snake.get_body().size() - 1],
+            this->m_model.m_apple.get_pos()
         );
     case Mode::PLAYER:
         return this->Super::get_ctrl_input();
