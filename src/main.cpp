@@ -30,7 +30,8 @@ int Game::get_action(){
     case Mode::AGENT:
         return this->m_model.m_agent.get_action(
             this->m_model.m_snake.get_body()[0],
-            this->m_model.m_snake.get_body()[this->m_model.m_snake.get_body().size() - 1],
+            this->m_model.m_snake.get_body()[
+                this->m_model.m_snake.get_body().size() - 1],
             this->m_model.m_apple.get_pos()
         );
     case Mode::PLAYER:
@@ -61,7 +62,7 @@ void Game::view_loop(){
         this->Super::draw_convex_shape(this->Super::m_convex_shape_hcycle, 
                                        this->Super::m_zoom / 2, 
                                        this->Super::m_zoom / 2, 
-                                       1, sf::Color::Transparent, sf::Color(0, 0, 255, 100)); 
+                                       1, sf::Color::Transparent, sf::Color(220, 220, 220));
     }
 
     // draw apple
@@ -71,11 +72,6 @@ void Game::view_loop(){
                                    0, sf::Color(255, 0, 100), sf::Color::Transparent, &this->Super::m_circle_shape);
 
     // draw snake
-    this->Super::draw_circle_shape(Super::m_zoom * 0.4f,
-                                   (this->m_model.m_snake.get_body()[0] % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f, 
-                                   (this->m_model.m_snake.get_body()[0] / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
-                                   0, sf::Color(58, 191, 39), sf::Color::Transparent, &this->Super::m_circle_shape);
-
     size_t i = 1;
     while (i < this->m_model.m_snake.get_body().size()){
 
@@ -126,6 +122,11 @@ void Game::view_loop(){
 
         i += (j + 1);
     }
+
+    this->Super::draw_circle_shape(Super::m_zoom * 0.4f,
+                                   (this->m_model.m_snake.get_body()[0] % this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
+                                   (this->m_model.m_snake.get_body()[0] / this->Super::m_cols) * Super::m_zoom + Super::m_zoom * 0.1f,
+                                   0, sf::Color(0, 100, 255), sf::Color::Transparent, &this->Super::m_circle_shape);
 }
 
 /***
