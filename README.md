@@ -8,7 +8,7 @@
 ### Build
 
 - **Dep**: `sudo apt-get update && apt-get install g++ cmake libsfml-dev`  
-- **Run**: `cb bin && ./build -R && ./compile && ./run -M phc -S small`  
+- **Run**: `cd bin && ./build.sh -R && ./compile.sh && ./run.sh -M phc`  
 
 ```
 usage: app/exec [-h] [-M MODE] [-S SIZE]
