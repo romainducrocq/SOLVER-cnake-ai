@@ -26,6 +26,6 @@ optional cmds:
 
 ### Demo
 
-![Demo small png](demo/demo_small.gif)  
+![Demo small png](demo/demo_small.png)  
 
-![Demo large png](demo/demo_large.gif)  
+![Demo large png](demo/demo_large.png)  
