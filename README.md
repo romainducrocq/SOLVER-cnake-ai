@@ -1,11 +1,13 @@
 ## CNAKE++AI: a snake ai in c++ 
 
+**Algorithm**: [Perturbated Hamiltonian Cycle](https://johnflux.com/2015/05/02/nokia-6110-part-3-algorithms/)
+
 ****
 
 ### Build
 
-- **Dep**: apt-get update && apt-get install g++ cmake libsfml-dev  
-- **Run**: cb bin && ./build -R && ./compile && ./run  
+- **Dep**: `sudo apt-get update && apt-get install g++ cmake libsfml-dev`  
+- **Run**: `cb bin && ./build -R && ./compile && ./run -M phc -S small`  
 
 ```
 usage: app/exec [-h] [-M MODE] [-S SIZE]
