@@ -13,7 +13,12 @@ Agent::~Agent(){
     delete[] this->m_unordered_hcycle;
 }
 
-int Agent::get_action(int pos){
+/***
+ * HAMILTONIAN CYCLE
+ * 
+ */
+
+int Agent::get_action_hc(int pos){
     this->m_count = (this->m_count + 1) % (this->Super::m_cols * this->Super::m_rows);
 
     if(this->Super::m_hcycle[m_count] == pos - 1){ return 1; }                        // left
@@ -24,11 +29,12 @@ int Agent::get_action(int pos){
     return 0;
 }
 
-int Agent::get_action(int pos_h, int pos_t, int pos_a){
-    return this->perturbated_hcycle(pos_h, pos_t, pos_a);
-}
+/***
+ * PERTURBATED HAMILTONIAN CYCLE
+ * 
+ */
 
-int Agent::perturbated_hcycle(int pos_h, int pos_t, int pos_a){
+int Agent::get_action_phc(int pos_h, int pos_t, int pos_a){
     int dir = 0, sc = 0;
 
     if(pos_h % this->Super::m_cols != 0 && 

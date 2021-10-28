@@ -5,10 +5,10 @@
 #include <chrono>
 #include <string>
 
-enum Mode{ AGENT, PLAYER };
+enum Mode{ AGENT_PHC, AGENT_HC, PLAYER };
 
 struct Args {
-    Mode mode = Mode::AGENT;
+    Mode mode = Mode::AGENT_PHC;
     int cols = 32;
     int rows = 32;
     int zoom = 20;

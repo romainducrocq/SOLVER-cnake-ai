@@ -2,6 +2,7 @@
 #define _CONTROLLER_H
 
 #include <unistd.h>
+#include <cstring>
 #include <cstdlib>
 #include <ctime>
 

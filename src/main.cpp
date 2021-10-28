@@ -27,12 +27,16 @@ void Game::act(int action){
 
 int Game::get_action(){
     switch (this->m_mode){
-    case Mode::AGENT:
-        return this->m_model.m_agent.get_action(
+    case Mode::AGENT_PHC:
+        return this->m_model.m_agent.get_action_phc(
             this->m_model.m_snake.get_body()[0],
             this->m_model.m_snake.get_body()[
                 this->m_model.m_snake.get_body().size() - 1],
             this->m_model.m_apple.get_pos()
+        );
+    case Mode::AGENT_HC:
+        return this->m_model.m_agent.get_action_hc(
+            this->m_model.m_snake.get_body()[0]
         );
     case Mode::PLAYER:
         return this->Super::get_ctrl_input();
@@ -167,6 +171,8 @@ int main(int argc, char** argv){
     
     Args args;
 
+    // https://github.com/gnif/LookingGlass/blob/c0c63fd93bf999b6601a782fec8b56e9133388cc/client/main.c#L1391
+
     for(;;){
         switch(getopt(argc, argv, "hM:S:")){
             case '?':
@@ -178,12 +184,12 @@ int main(int argc, char** argv){
                 std::cerr << "\n";
                 std::cerr << "optional args:\n";
                 std::cerr << "  -h        show this help message and exit\n";
-                std::cerr << "  -M MODE   set mode   [a AGENT | p PLAYER]\n";
-                std::cerr << "  -S SIZE   set size   [s SMALL | l LARGE ]\n";
+                std::cerr << "  -M MODE   set mode  < phc | hc | play >  \n";
+                std::cerr << "  -S SIZE   set size  < small | large >    \n";
                 std::cerr << "\n";
                 std::cerr << "optional cmds:\n";
-                std::cerr << "  key SPACE set frate  [24FPS |VSYNC  |MAX]\n";
-                std::cerr << "  key D     set debug  [N       |Y        ]\n";
+                std::cerr << "  key SPACE set frate 24FPS, VSYNC, MAX    \n";
+                std::cerr << "  key D     set debug NO, YES              \n";
 
                 return -1;
 
@@ -191,30 +197,22 @@ int main(int argc, char** argv){
                 break;
 
             case 'M': // MODE
-                switch(optarg[0]){
-                    case 'a': // agent 
-                        // default
-                        break;
-                    case 'p': // player
-                        args.mode = Mode::PLAYER;
-                        break;
-                    default:
-                        break;
+                if(std::strcmp(optarg, "phc") == 0){        // agent phc
+                    ; // default
+                }else if(std::strcmp(optarg, "hc") == 0){   // agent hc
+                    args.mode = Mode::AGENT_HC;
+                }else if(std::strcmp(optarg, "play") == 0){ // player
+                    args.mode = Mode::PLAYER;
                 }
                 continue;
 
             case 'S': // SIZE
-                switch(optarg[0]){
-                    case 's': // small 
-                        // default                        
-                        break;
-                    case 'l': // large
+                if(std::strcmp(optarg, "small") == 0){         // small
+                    ; // default
+                }else if(std::strcmp(optarg, "large") == 0){   // large
                         args.cols = 128;
                         args.rows = 64;
                         args.zoom = 15;  
-                        break;
-                    default:
-                        break;
                 }
                 continue;
 
