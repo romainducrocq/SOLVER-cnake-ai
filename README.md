@@ -16,13 +16,13 @@ usage: app/exec [-h] [-M MODE] [-S SIZE]
 CNAKE++AI
 
 optional args:
-  -h        show this help message and exit
-  -M MODE   set mode  < phc | hc | play >
-  -S SIZE   set size  < small | large >
+  -h       show this help message and exit
+  -M MODE  set mode  < phc | hc | play >
+  -S SIZE  set size  < small | large >
 
 optional cmds:
-  key SPACE set frate 24FPS, VSYNC, MAX
-  key D     set debug NO, YES
+  key S    set speed 24FPS, VSYNC, MAX
+  key D    set debug NO, YES
 ```
 
 ****

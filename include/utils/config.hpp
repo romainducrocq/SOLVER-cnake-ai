@@ -1,0 +1,93 @@
+#ifndef _CONFIG_H
+#define _CONFIG_H
+
+#include <unistd.h>
+
+#include <iostream>
+#include <cstring>
+
+template<typename T>
+struct DefaultConf
+{
+    enum Action{
+        NOOP, LEFT, RIGHT, UP, DOWN
+    };
+    enum Mode{
+        AGENT_PHC, AGENT_HC, PLAYER
+    };
+
+    const static char* NAME;
+    static Mode MODE;
+    static int COLS;
+    static int ROWS;
+    static int ZOOM;
+
+    static void argParse(int argc, char** argv)
+    {
+        // https://github.com/gnif/LookingGlass/blob/c0c63fd93bf999b6601a782fec8b56e9133388cc/client/main.c#L1391
+
+        for(;;){
+            switch(getopt(argc, argv, "hM:S:")){
+                case '?':
+                case 'h':
+                default :
+                    std::cerr << "usage: app/exec [-h] [-M MODE] [-S SIZE]\n";
+                    std::cerr << "\n";
+                    std::cerr << "CNAKE++AI" << "\n";
+                    std::cerr << "\n";
+                    std::cerr << "optional args:\n";
+                    std::cerr << "  -h       show this help message and exit\n";
+                    std::cerr << "  -M MODE  set mode  < phc | hc | play >  \n";
+                    std::cerr << "  -S SIZE  set size  < small | large >    \n";
+                    std::cerr << "\n";
+                    std::cerr << "optional cmds:\n";
+                    std::cerr << "  key S    set speed 24FPS, VSYNC, MAX    \n";
+                    std::cerr << "  key D    set debug NO, YES              \n";
+
+                    return;
+
+                case -1:
+                    break;
+
+                case 'M': // MODE
+                    if(std::strcmp(optarg, "phc") == 0){        // agent phc
+                        DefaultConf<T>::MODE = DefaultConf<T>::Mode::AGENT_PHC;
+                    }else if(std::strcmp(optarg, "hc") == 0){   // agent hc
+                        DefaultConf<T>::MODE = DefaultConf<T>::Mode::AGENT_HC;
+                    }else if(std::strcmp(optarg, "play") == 0){ // player
+                        DefaultConf<T>::MODE = DefaultConf<T>::Mode::PLAYER;
+                    }
+                    continue;
+
+                case 'S': // SIZE
+                    if(std::strcmp(optarg, "small") == 0){         // small
+                        DefaultConf<T>::COLS = 32;
+                        DefaultConf<T>::ROWS = 32;
+                        DefaultConf<T>::ZOOM = 20;
+                    }else if(std::strcmp(optarg, "large") == 0){   // large
+                        DefaultConf<T>::COLS = 128;
+                        DefaultConf<T>::ROWS = 64;
+                        DefaultConf<T>::ZOOM = 15;
+                    }
+                    continue;
+
+            }
+            break;
+        }
+    }
+};
+
+template<typename T>
+const char* DefaultConf<T>::NAME = "CNAKE++AI";
+template<typename T>
+typename DefaultConf<T>::Mode DefaultConf<T>::MODE = DefaultConf<T>::Mode::AGENT_PHC;
+template<typename T>
+int DefaultConf<T>::COLS = 32;
+template<typename T>
+int DefaultConf<T>::ROWS = 32;
+template<typename T>
+int DefaultConf<T>::ZOOM = 20;
+
+using Conf = DefaultConf<int>;
+
+#endif

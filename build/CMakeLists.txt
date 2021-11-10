@@ -9,7 +9,7 @@ set(EXEC_DIR "${PROJECT_SOURCE_DIR}/../bin/app/")
 set(LINK_LIB "-lsfml-graphics -lsfml-window -lsfml-system")
 
 file(GLOB_RECURSE SOURCE_FILES "${SOURCE_DIR}/*.cpp")
-file(GLOB_RECURSE HEADER_FILES "${HEADER_DIR}/*.h")
+file(GLOB_RECURSE HEADER_FILES "${HEADER_DIR}/*.hpp")
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries(${PROJECT_NAME} ${LINK_LIB})

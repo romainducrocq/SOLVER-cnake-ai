@@ -1,0 +1,29 @@
+[2021-11-09 21:37:08.174] [exthost] [info] extension host started
+[2021-11-09 21:37:08.174] [exthost] [info] Skipping acquiring lock for /home/romain/Documents/c++/tmp/cnake-ai/~/.vscode-root/User/workspaceStorage/4e001ffe958a007ac70c6dfbdecfaca5.
+[2021-11-09 21:37:08.257] [exthost] [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+[2021-11-09 21:37:08.257] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/share/code/resources/app/extensions/microsoft-authentication/dist/extension.js
+[2021-11-09 21:37:08.285] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: true, activationEvent: '*'
+[2021-11-09 21:37:08.285] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/share/code/resources/app/extensions/debug-auto-launch/dist/extension
+[2021-11-09 21:37:08.288] [exthost] [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*', root cause: vscode.github
+[2021-11-09 21:37:08.288] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/share/code/resources/app/extensions/git/dist/main
+[2021-11-09 21:37:08.334] [exthost] [info] ExtensionService#_doActivateExtension zhuangtongfa.material-theme, startup: true, activationEvent: '*'
+[2021-11-09 21:37:08.334] [exthost] [info] ExtensionService#loadCommonJSModule file:///home/romain/.vscode/extensions/zhuangtongfa.material-theme-3.13.2/out/extension.js
+[2021-11-09 21:37:08.430] [exthost] [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+[2021-11-09 21:37:08.430] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/share/code/resources/app/extensions/github/dist/extension.js
+[2021-11-09 21:37:08.457] [exthost] [info] ExtensionService#_doActivateExtension ms-vscode.js-debug, startup: false, activationEvent: 'onCommand:extension.js-debug.clearAutoAttachVariables'
+[2021-11-09 21:37:08.457] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/share/code/resources/app/extensions/ms-vscode.js-debug/src/extension.js
+[2021-11-09 21:37:08.625] [exthost] [info] eager extensions activated
+[2021-11-09 21:37:08.661] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onStartupFinished'
+[2021-11-09 21:37:08.661] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/share/code/resources/app/extensions/emmet/dist/node/emmetNodeMain
+[2021-11-09 21:37:08.674] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+[2021-11-09 21:37:08.674] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/share/code/resources/app/extensions/merge-conflict/dist/mergeConflictMain
+[2021-11-09 21:37:08.729] [exthost] [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+[2021-11-09 21:37:08.729] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/share/code/resources/app/extensions/github-authentication/dist/extension.js
+[2021-11-09 21:37:09.119] [exthost] [info] ExtensionService#_doActivateExtension ms-vscode.cmake-tools, startup: false, activationEvent: 'workspaceContains:*/CMakeLists.txt,*/*/CMakeLists.txt,*/*/*/CMakeLists.txt'
+[2021-11-09 21:37:09.119] [exthost] [info] ExtensionService#loadCommonJSModule file:///home/romain/.vscode/extensions/ms-vscode.cmake-tools-1.9.1/dist/main
+[2021-11-09 21:37:13.070] [exthost] [info] ExtensionService#_doActivateExtension ms-vscode.cpptools, startup: false, activationEvent: 'onLanguage:cpp'
+[2021-11-09 21:37:13.070] [exthost] [info] ExtensionService#loadCommonJSModule file:///home/romain/.vscode/extensions/ms-vscode.cpptools-1.7.1/dist/main
+[2021-11-09 21:38:52.015] [exthost] [warning] [Decorations] CAPPING events from decorations provider vscode.git 288
+[2021-11-09 21:39:05.997] [exthost] [warning] [Decorations] CAPPING events from decorations provider vscode.git 288
+[2021-11-09 21:39:06.646] [exthost] [info] extension host terminating: renderer closed the socket
+[2021-11-09 21:39:07.676] [exthost] [info] exiting with code 0
