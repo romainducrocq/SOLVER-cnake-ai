@@ -8,8 +8,9 @@
 int main(int argc, char** argv)
 {
     std::srand(time(nullptr));
-    
-    Conf::argParse(argc, argv);
 
-    Application app;
+    if(Conf::argParse(argc, argv))
+    {
+        Application app;
+    }
 }

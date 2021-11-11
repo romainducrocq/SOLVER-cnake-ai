@@ -20,7 +20,7 @@ struct DefaultConf
     const static int BG_COL[3];
     const static int FRAMERATE;
     const static int ANTIALIAS;
-    const static bool VSYNC;
+
     static int WIN_W;
     static int WIN_H;
 
@@ -29,7 +29,7 @@ struct DefaultConf
     static int ROWS;
     static int ZOOM;
 
-    static void argParse(int argc, char** argv)
+    static bool argParse(int argc, char** argv)
     {
         // https://github.com/gnif/LookingGlass/blob/c0c63fd93bf999b6601a782fec8b56e9133388cc/client/main.c#L1391
 
@@ -38,9 +38,9 @@ struct DefaultConf
                 case '?':
                 case 'h':
                 default :
-                    std::cerr << "usage: app/exec [-h] [-M MODE] [-S SIZE]\n";
+                    std::cerr << "usage: apps/exec [-h] [-M MODE] [-S SIZE]\n";
                     std::cerr << "\n";
-                    std::cerr << "CNAKE++AI" << "\n";
+                    std::cerr << DefaultConf<T>::NAME << "\n";
                     std::cerr << "\n";
                     std::cerr << "optional args:\n";
                     std::cerr << "  -h       show this help message and exit\n";
@@ -51,7 +51,7 @@ struct DefaultConf
                     std::cerr << "  key S    set speed 24FPS, VSYNC, MAX    \n";
                     std::cerr << "  key D    set debug NO, YES              \n";
 
-                    return;
+                    return false;
 
                 case -1:
                     break;
@@ -85,6 +85,8 @@ struct DefaultConf
             }
             break;
         }
+
+        return true;
     }
 };
 
@@ -96,8 +98,7 @@ template<typename T>
 const int DefaultConf<T>::FRAMERATE = 24;
 template<typename T>
 const int DefaultConf<T>::ANTIALIAS = 0;
-template<typename T>
-const bool DefaultConf<T>::VSYNC = false;
+
 template<typename T>
 int DefaultConf<T>::WIN_W = 32 * 20;
 template<typename T>

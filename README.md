@@ -11,7 +11,7 @@
 - **Run**: `cd bin && ./build.sh -R && ./compile.sh && ./run.sh -M phc -S small`  
 
 ```
-usage: app/exec [-h] [-M MODE] [-S SIZE]
+usage: apps/exec [-h] [-M MODE] [-S SIZE]
 
 CNAKE++AI
 

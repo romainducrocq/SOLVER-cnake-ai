@@ -8,7 +8,7 @@ Window::Window()
     options.antialiasingLevel = Conf::ANTIALIAS;
 
     this->m_window.create(sf::VideoMode(Conf::WIN_W, Conf::WIN_H, 32), Conf::NAME, sf::Style::Default, options);
-    this->m_window.setVerticalSyncEnabled(Conf::VSYNC);
+    this->m_window.setVerticalSyncEnabled(false);
 
     this->m_window.setFramerateLimit(Conf::FRAMERATE);
 }
