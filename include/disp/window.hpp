@@ -6,7 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../utils/config.hpp"
+#include "utils/config.hpp"
 
 #include "ev_mngr.hpp"
 #include "ev_state.hpp"

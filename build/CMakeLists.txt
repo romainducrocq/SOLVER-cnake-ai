@@ -12,5 +12,6 @@ file(GLOB_RECURSE SOURCE_FILES "${SOURCE_DIR}/*.cpp")
 file(GLOB_RECURSE HEADER_FILES "${HEADER_DIR}/*.hpp")
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${HEADER_DIR})
 target_link_libraries(${PROJECT_NAME} ${LINK_LIB})
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${EXEC_DIR}")

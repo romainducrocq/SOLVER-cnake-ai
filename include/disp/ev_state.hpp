@@ -1,7 +1,7 @@
 #ifndef _EV_STATE_HPP
 #define _EV_STATE_HPP
 
-#include "../utils/config.hpp"
+#include "utils/config.hpp"
 
 #include "ev_mngr.hpp"
 

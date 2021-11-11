@@ -1,4 +1,4 @@
-#include "../../include/disp/renderer.hpp"
+#include "disp/renderer.hpp"
 
 Renderer::Renderer(sf::RenderTarget& target)
     : m_target(target)

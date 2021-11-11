@@ -1,7 +1,7 @@
 #ifndef _AGENT_HPP
 #define _AGENT_HPP
 
-#include "../../utils/config.hpp"
+#include "utils/config.hpp"
 
 #include "hcycle.hpp"
 

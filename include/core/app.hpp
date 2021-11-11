@@ -1,9 +1,9 @@
 #ifndef _APP_HPP
 #define _APP_HPP
 
-#include "../utils/config.hpp"
+#include "utils/config.hpp"
 
-#include "../disp/window.hpp"
+#include "disp/window.hpp"
 
 #include "snake/snake.hpp"
 #include "agent/agent.hpp"

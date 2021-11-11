@@ -1,9 +1,9 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "../include/utils/config.hpp"
+#include "utils/config.hpp"
 
-#include "../include/core/app.hpp"
+#include "core/app.hpp"
 
 int main(int argc, char** argv)
 {

@@ -1,4 +1,4 @@
-#include "../../../include/core/agent/hcycle.hpp"
+#include "core/agent/hcycle.hpp"
 
 
 HamiltonianCycle::HamiltonianCycle()

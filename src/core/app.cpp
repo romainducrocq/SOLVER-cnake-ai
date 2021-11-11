@@ -1,4 +1,4 @@
-#include "../../include/core/app.hpp"
+#include "core/app.hpp"
 
 Application::Application()
 {

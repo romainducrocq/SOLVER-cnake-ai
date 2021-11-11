@@ -4,8 +4,8 @@
 #include <cstdlib>
 #include <vector>
 
-#include "../../utils/config.hpp"
-#include "../../utils/vector.hpp"
+#include "utils/config.hpp"
+#include "utils/vector.hpp"
 
 class Apple
 {

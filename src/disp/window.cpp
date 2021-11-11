@@ -1,4 +1,4 @@
-#include "../../include/disp/window.hpp"
+#include "disp/window.hpp"
 
 Window::Window()
     : m_renderer(this->m_window)

@@ -5,7 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../utils/config.hpp"
+#include "utils/config.hpp"
 
 class Renderer
 {

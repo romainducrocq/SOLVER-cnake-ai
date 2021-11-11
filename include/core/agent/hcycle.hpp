@@ -9,8 +9,8 @@
 #include <vector>
 #include <set>
 
-#include "../../utils/config.hpp"
-#include "../../utils/vector.hpp"
+#include "utils/config.hpp"
+#include "utils/vector.hpp"
 
 template<typename T>
 bool v_contains(const std::vector<T>& v, T i)
