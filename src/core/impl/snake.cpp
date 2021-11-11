@@ -1,4 +1,4 @@
-#include "core/snake/snake.hpp"
+#include "core/impl/snake.hpp"
 
 Apple::Apple()
 {

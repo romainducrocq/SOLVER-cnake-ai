@@ -1,38 +1,37 @@
 #ifndef _WINDOW_HPP
 #define _WINDOW_HPP
 
-#include <string>
-#include <vector>
-
 #include <SFML/Graphics.hpp>
 
 #include "utils/config.hpp"
+#include "utils/events.hpp"
 
-#include "ev_mngr.hpp"
-#include "ev_state.hpp"
 #include "renderer.hpp"
 
 class Window
 {
     protected:
-        sf::RenderWindow m_window;
+        sf::RenderWindow   m_window;
+        sfev::EventManager m_ev_manager;
+
         Renderer m_renderer;
 
-        sfev::EventManager m_ev_mngr;
-        EventState m_ev_state;
+protected:
+        void run();
 
-    protected:
-        void setup();
+        void init();
 
         void loop();
 
-        virtual void viewSetup() = 0;
-        
-        virtual void viewLoop() = 0;
+        virtual void eventAdd() = 0;
 
-        virtual void ctrlSetup() = 0;
+        virtual void drawInit() = 0;
         
-        virtual void ctrlLoop() = 0;
+        virtual void drawLoop() = 0;
+
+        virtual void mainInit() = 0;
+        
+        virtual void mainLoop() = 0;
 
         void waitExit();
 

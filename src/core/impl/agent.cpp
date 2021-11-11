@@ -1,4 +1,4 @@
-#include "core/agent/agent.hpp"
+#include "core/impl/agent.hpp"
 
 Agent::Agent()
 {

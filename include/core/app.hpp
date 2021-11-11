@@ -1,32 +1,46 @@
 #ifndef _APP_HPP
 #define _APP_HPP
 
+#include <SFML/Graphics.hpp>
+
 #include "utils/config.hpp"
+#include "utils/events.hpp"
 
 #include "disp/window.hpp"
 
-#include "snake/snake.hpp"
-#include "agent/agent.hpp"
+#include "impl/snake.hpp"
+#include "impl/agent.hpp"
+
+struct EventState
+{
+    int  speed = 0;
+    bool debug = false;
+
+    Conf::Action action = Conf::NOOP;
+};
 
 class Application: public Window
 {
     private:
         typedef Window Super;
 
+        EventState m_ev_state;
+
         Agent m_agent;
         Apple m_apple;
         Snake m_snake;
 
     private:
-        void viewSetup() override;
+        void eventAdd() override;
 
-        void viewLoop() override;
+        void drawInit() override;
 
-        void ctrlSetup() override;
+        void drawLoop() override;
+
+        void mainInit() override;
         
-        void ctrlLoop() override;
+        void mainLoop() override;
 
-    private:
         int getAction();
 
     public:

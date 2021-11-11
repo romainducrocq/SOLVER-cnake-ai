@@ -1,33 +1,40 @@
 #include "disp/window.hpp"
 
 Window::Window()
-    : m_renderer(this->m_window)
-    , m_ev_mngr(this->m_window, true)
+    : m_ev_manager(this->m_window, true)
+    , m_renderer(this->m_window)
 {
     sf::ContextSettings options;
-    options.antialiasingLevel = 0;
+    options.antialiasingLevel = Conf::ANTIALIAS;
 
     this->m_window.create(sf::VideoMode(Conf::WIN_W, Conf::WIN_H, 32), Conf::NAME, sf::Style::Default, options);
-    this->m_window.setVerticalSyncEnabled(false);
+    this->m_window.setVerticalSyncEnabled(Conf::VSYNC);
 
     this->m_window.setFramerateLimit(Conf::FRAMERATE);
 }
 
-void Window::setup()
+void Window::run()
 {
-    this->ctrlSetup();
-    this->viewSetup();
+    this->init();
+    this->loop();
+}
+
+void Window::init()
+{
+    this->eventAdd();
+    this->mainInit();
+    this->drawInit();
 }
 
 void Window::loop()
 {
     while(this->m_window.isOpen()){
-        this->m_ev_mngr.processEvents();
+        this->m_ev_manager.processEvents();
 
-        this->ctrlLoop();
+        this->mainLoop();
 
         this->m_window.clear(sf::Color(Conf::BG_COL[0], Conf::BG_COL[1], Conf::BG_COL[2]));
-        this->viewLoop();
+        this->drawLoop();
         this->m_window.display();
     }
 }

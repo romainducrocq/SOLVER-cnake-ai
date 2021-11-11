@@ -1,5 +1,5 @@
-#ifndef _EV_MNGR_HPP
-#define _EV_MNGR_HPP
+#ifndef _EVENTS_HPP
+#define _EVENTS_HPP
 
 #include <SFML/Graphics.hpp>
 #include <unordered_map>

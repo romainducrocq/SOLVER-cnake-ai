@@ -10,46 +10,46 @@
 class Renderer
 {
     private:
-        sf::RenderTarget& m_target;
+        sf::RenderTarget& m_window;
 
-        sf::ConvexShape m_convex_shape_hcycle;
-        sf::CircleShape m_circle_shape;
+        sf::CircleShape    m_circle_shape;
         sf::RectangleShape m_rectangle_shape;
 
+        sf::ConvexShape m_convex_shape_hcycle;
+
     private:
-        void drawConvexShape(sf::ConvexShape& convex_shape, float position_x, float position_y,
-                             int outline_thickness, sf::Color fill_color, sf::Color outline_color);
+        void drawShape(sf::ConvexShape& convex_shape, float position_x, float position_y,
+                       sf::Color fill_color = sf::Color::Black, int outline_thickness = 0, sf::Color outline_color = sf::Color::Black);
 
-        void drawCircleShape(float radius, float position_x, float position_y,
-                             int outline_thickness, sf::Color fill_color, sf::Color outline_color,
-                             sf::CircleShape* circle_shape = nullptr);
+        void drawCircle(float radius, float position_x, float position_y,
+                        sf::Color fill_color = sf::Color::Black, int outline_thickness = 0, sf::Color outline_color = sf::Color::Black);
 
-        void drawRectangleShape(float size_x, float size_y, float position_x, float position_y,
-                                int outline_thickness, sf::Color fill_color, sf::Color outline_color,
-                                sf::RectangleShape* rectangle_shape = nullptr);
+        void drawRectangle(float size_x, float size_y, float position_x, float position_y,
+                           sf::Color fill_color = sf::Color::Black, int outline_thickness = 0, sf::Color outline_color = sf::Color::Black);
 
-        void drawLineShape(float position_x1, float position_y1, float position_x2, float position_y2);
+        void drawLine(float position_x1, float position_y1, float position_x2, float position_y2,
+                      sf::Color color = sf::Color::Black);
 
     public:
-        Renderer(sf::RenderTarget& target);
+        Renderer(sf::RenderWindow& target);
 
         /***
          * INIT
          *
          */
 
-        void initShapeHCycle(const int* hcyle);
+        void initHCycle(const int* hcyle);
 
         /***
-         * RENDER
+         * LOOP
          *
          */
 
-        void renderShapeHCycle(bool is_debug);
+        void renderHCycle(bool is_debug);
 
-        void renderShapeApple(int pos);
+        void renderApple(int pos);
 
-        void renderShapeSnake(const std::vector<int>& body);
+        void renderSnake(const std::vector<int>& body);
 };
 
 #endif
