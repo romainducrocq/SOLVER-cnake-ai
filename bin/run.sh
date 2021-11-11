@@ -6,5 +6,5 @@ do
     args="${args} ${ARG}"
 done
 
-cd app/
+cd apps/
 ./exec${args}

@@ -1,23 +1,23 @@
-#include "../../include/model/snake.hpp"
+#include "../../../include/core/snake/snake.hpp"
 
 Apple::Apple()
 {
-    this->update_pos({ 0 });
+    this->updatePos({ 0 });
 }
 
-int Apple::get_pos() const
+int Apple::getPos() const
 {
     return this->m_pos;
 }
 
-void Apple::update_pos(const std::vector<int>& body)
+void Apple::updatePos(const std::vector<int>& body)
 {
     do{
         this->m_pos = std::rand() % (Conf::COLS * Conf::ROWS);
-    }while(!this->is_valid_pos(body));
+    }while(!this->isValidPos(body));
 }
 
-bool Apple::is_valid_pos(const std::vector<int>& body)
+bool Apple::isValidPos(const std::vector<int>& body)
 {
     for(size_t i = 0; i < body.size(); i++){
         if(body[i] == this->m_pos){
@@ -29,20 +29,20 @@ bool Apple::is_valid_pos(const std::vector<int>& body)
 
 Snake::Snake()
 {
-    this->update_size();
+    this->updateSize();
 }
 
-const std::vector<int>& Snake::get_body() const
+const std::vector<int>& Snake::getBody() const
 {
     return this->m_body;
 }
 
-void Snake::update_size()
+void Snake::updateSize()
 {
     this->m_body.push_back(this->m_pos.x + this->m_pos.y * Conf::COLS);
 }
 
-void Snake::update_body()
+void Snake::updateBody()
 {
     for(size_t i = this->m_body.size() - 1; i > 0; i--){
         this->m_body[i] = this->m_body[i-1];
@@ -50,13 +50,13 @@ void Snake::update_body()
     this->m_body[0] = this->m_pos.x + this->m_pos.y * Conf::COLS;
 }
 
-void Snake::update_pos()
+void Snake::updatePos()
 {
     this->m_pos.x += this->m_dir.x;
     this->m_pos.y += this->m_dir.y;
 }
 
-void Snake::update_dir(Vector2i dir)
+void Snake::updateDir(Vector2i dir)
 {
     if(!(this->m_dir.x == -1 * dir.x && this->m_dir.y == -1 * dir.y)){
         this->m_dir.x = dir.x;
@@ -64,12 +64,12 @@ void Snake::update_dir(Vector2i dir)
     }
 }
 
-bool Snake::is_eat(int pos) const
+bool Snake::isEat(int pos) const
 {
     return (pos == this->m_pos.x + this->m_pos.y * Conf::COLS);
 }
 
-bool Snake::is_hit() const
+bool Snake::isHit() const
 {
     if(this->m_pos.x >= Conf::COLS || this->m_pos.x < 0){
         return true;
@@ -84,4 +84,24 @@ bool Snake::is_hit() const
         }
     }
     return false; 
+}
+
+void Snake::act(int action)
+{
+    switch(action){
+        case Conf::Action::LEFT:  // left
+            this->updateDir(Vector2i(-1, 0));
+            break;
+        case Conf::Action::RIGHT: // right
+            this->updateDir(Vector2i(1, 0));
+            break;
+        case Conf::Action::UP:    // up
+            this->updateDir(Vector2i(0, -1));
+            break;
+        case Conf::Action::DOWN:  // down
+            this->updateDir(Vector2i(0, 1));
+            break;
+        default:
+            break;
+    }
 }

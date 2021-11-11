@@ -1,5 +1,5 @@
-#ifndef _HAMILTONIAN_CYCLE_H
-#define _HAMILTONIAN_CYCLE_H
+#ifndef _HCYCLE_HPP
+#define _HCYCLE_HPP
 
 #include <iostream>
 #include <cassert>
@@ -9,8 +9,8 @@
 #include <vector>
 #include <set>
 
-#include "../utils/config.hpp"
-#include "../utils/vector.hpp"
+#include "../../utils/config.hpp"
+#include "../../utils/vector.hpp"
 
 template<typename T>
 bool v_contains(const std::vector<T>& v, T i)
@@ -25,22 +25,22 @@ class HamiltonianCycle
 
     private:
         // test
-        void print_debug(const std::vector<int>* pmaze);
+        void printDebug(const std::vector<int>* pmaze) const;
 
         // prim maze generator
-        void add_pwalls(std::set<Vector2i>& pwalls, int pcell);
+        void addPWalls(std::set<Vector2i>& pwalls, int pcell);
 
-        void pmaze_gen_alg(std::vector<int>* pmaze);
+        void pMazeGenAlg(std::vector<int>* pmaze);
 
         // hamiltonian cycle
-        void hcycle_gen_alg();
+        void hCycleGenAlg();
 
     public:
         HamiltonianCycle();
 
         ~HamiltonianCycle();
 
-        const int* get_hcycle() const;
+        const int* getHCycle() const;
 };
 
 #endif

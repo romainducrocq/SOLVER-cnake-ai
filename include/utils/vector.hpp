@@ -1,5 +1,5 @@
-#ifndef _VECTOR_H
-#define _VECTOR_H
+#ifndef _VECTOR_HPP
+#define _VECTOR_HPP
 
 struct Vector2i
 {

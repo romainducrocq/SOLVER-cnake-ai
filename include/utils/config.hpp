@@ -1,5 +1,5 @@
-#ifndef _CONFIG_H
-#define _CONFIG_H
+#ifndef _CONFIG_HPP
+#define _CONFIG_HPP
 
 #include <unistd.h>
 
@@ -17,6 +17,11 @@ struct DefaultConf
     };
 
     const static char* NAME;
+    const static int BG_COL[3];
+    const static int FRAMERATE;
+    static int WIN_W;
+    static int WIN_H;
+
     static Mode MODE;
     static int COLS;
     static int ROWS;
@@ -64,10 +69,14 @@ struct DefaultConf
                         DefaultConf<T>::COLS = 32;
                         DefaultConf<T>::ROWS = 32;
                         DefaultConf<T>::ZOOM = 20;
+                        DefaultConf<T>::WIN_W = 32 * 20;
+                        DefaultConf<T>::WIN_H = 32 * 20;
                     }else if(std::strcmp(optarg, "large") == 0){   // large
                         DefaultConf<T>::COLS = 128;
                         DefaultConf<T>::ROWS = 64;
                         DefaultConf<T>::ZOOM = 15;
+                        DefaultConf<T>::WIN_W = 128 * 15;
+                        DefaultConf<T>::WIN_H = 64 * 15;
                     }
                     continue;
 
@@ -79,6 +88,15 @@ struct DefaultConf
 
 template<typename T>
 const char* DefaultConf<T>::NAME = "CNAKE++AI";
+template<typename T>
+const int DefaultConf<T>::BG_COL[3] = { 51, 51, 51 };
+template<typename T>
+const int DefaultConf<T>::FRAMERATE = 24;
+template<typename T>
+int DefaultConf<T>::WIN_W = 32 * 20;
+template<typename T>
+int DefaultConf<T>::WIN_H = 32 * 20;
+
 template<typename T>
 typename DefaultConf<T>::Mode DefaultConf<T>::MODE = DefaultConf<T>::Mode::AGENT_PHC;
 template<typename T>

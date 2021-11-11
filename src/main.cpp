@@ -2,7 +2,8 @@
 #include <ctime>
 
 #include "../include/utils/config.hpp"
-#include "../include/controller/main_loop.hpp"
+
+#include "../include/core/app.hpp"
 
 int main(int argc, char** argv)
 {
@@ -10,5 +11,5 @@ int main(int argc, char** argv)
     
     Conf::argParse(argc, argv);
 
-    MainLoop game;
+    Application app;
 }

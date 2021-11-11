@@ -1,9 +1,9 @@
-#ifndef _AGENT_H
-#define _AGENT_H
+#ifndef _AGENT_HPP
+#define _AGENT_HPP
+
+#include "../../utils/config.hpp"
 
 #include "hcycle.hpp"
-
-#include "../utils/config.hpp"
 
 class Agent: public HamiltonianCycle
 {
@@ -19,9 +19,9 @@ class Agent: public HamiltonianCycle
         
         ~Agent();
 
-        Conf::Action get_action_hc(int pos);
+        Conf::Action getActionHC(int pos);
 
-        Conf::Action get_action_phc(int pos_h, int pos_t, int pos_a);
+        Conf::Action getActionPHC(int pos_h, int pos_t, int pos_a) const;
 };
 
 #endif

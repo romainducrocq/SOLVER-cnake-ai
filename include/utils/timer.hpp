@@ -1,5 +1,5 @@
-#ifndef _TIMER_H
-#define _TIMER_H
+#ifndef _TIMER_HPP
+#define _TIMER_HPP
 
 #include <iostream>
 #include <chrono>

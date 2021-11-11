@@ -5,7 +5,7 @@ project(exec)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -std=c++17")
 set(SOURCE_DIR "${PROJECT_SOURCE_DIR}/../src/")
 set(HEADER_DIR "${PROJECT_SOURCE_DIR}/../include/")
-set(EXEC_DIR "${PROJECT_SOURCE_DIR}/../bin/app/")
+set(EXEC_DIR "${PROJECT_SOURCE_DIR}/../bin/apps/")
 set(LINK_LIB "-lsfml-graphics -lsfml-window -lsfml-system")
 
 file(GLOB_RECURSE SOURCE_FILES "${SOURCE_DIR}/*.cpp")

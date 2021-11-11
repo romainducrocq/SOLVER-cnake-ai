@@ -1,4 +1,5 @@
-# include "../../include/model/hcycle.hpp"
+#include "../../../include/core/agent/hcycle.hpp"
+
 
 HamiltonianCycle::HamiltonianCycle()
 {
@@ -6,7 +7,7 @@ HamiltonianCycle::HamiltonianCycle()
 
     this->m_hcycle = new int[Conf::COLS * Conf::ROWS];
     
-    this->hcycle_gen_alg();
+    this->hCycleGenAlg();
 }
 
 HamiltonianCycle::~HamiltonianCycle()
@@ -19,7 +20,7 @@ HamiltonianCycle::~HamiltonianCycle()
  * 
  */
 
-void HamiltonianCycle::add_pwalls(std::set<Vector2i>& pwalls, int pcell)
+void HamiltonianCycle::addPWalls(std::set<Vector2i>& pwalls, int pcell)
 {
     if(pcell % (Conf::COLS / 2) != 0){                      // left
         pwalls.insert(Vector2i(pcell - 1, pcell));
@@ -35,7 +36,7 @@ void HamiltonianCycle::add_pwalls(std::set<Vector2i>& pwalls, int pcell)
     }
 }
 
-void HamiltonianCycle::pmaze_gen_alg(std::vector<int>* pmaze)
+void HamiltonianCycle::pMazeGenAlg(std::vector<int>* pmaze)
 {
     // https://en.wikipedia.org/wiki/Maze_generation_algorithm
 
@@ -53,7 +54,7 @@ void HamiltonianCycle::pmaze_gen_alg(std::vector<int>* pmaze)
     pcells[pcell] = true;
 
     // add adjacent walls to wall list
-    this->add_pwalls(pwalls, pcell);
+    this->addPWalls(pwalls, pcell);
 
     // while wall list not empty
     while(!pwalls.empty()){
@@ -74,7 +75,7 @@ void HamiltonianCycle::pmaze_gen_alg(std::vector<int>* pmaze)
             pcells[pcell] = true;
 
             // add adjacent walls to wall list
-            this->add_pwalls(pwalls, pcell);
+            this->addPWalls(pwalls, pcell);
         }
 
         // remove wall from wall list
@@ -89,11 +90,11 @@ void HamiltonianCycle::pmaze_gen_alg(std::vector<int>* pmaze)
  * 
  */
 
-void HamiltonianCycle::hcycle_gen_alg()
+void HamiltonianCycle::hCycleGenAlg()
 {
     std::vector<int>* pmaze = new std::vector<int>[(Conf::COLS / 2) * (Conf::ROWS / 2)];
 
-    this->pmaze_gen_alg(pmaze);
+    this->pMazeGenAlg(pmaze);
 
     int hcell = 0, hdir = 0, hcount = 0;
 
@@ -137,7 +138,7 @@ void HamiltonianCycle::hcycle_gen_alg()
     delete[] pmaze;
 }
 
-const int* HamiltonianCycle::get_hcycle() const
+const int* HamiltonianCycle::getHCycle() const
 {
     return this->m_hcycle;
 }
@@ -147,7 +148,7 @@ const int* HamiltonianCycle::get_hcycle() const
  * 
  */
 
-void HamiltonianCycle::print_debug(const std::vector<int>* pmaze)
+void HamiltonianCycle::printDebug(const std::vector<int>* pmaze) const
 {
 
     // print pmaze

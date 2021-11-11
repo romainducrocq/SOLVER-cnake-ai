@@ -1,4 +1,4 @@
-#include "../../include/model/agent.hpp"
+#include "../../../include/core/agent/agent.hpp"
 
 Agent::Agent()
 {
@@ -18,7 +18,7 @@ Agent::~Agent()
  * 
  */
 
-Conf::Action Agent::get_action_hc(int pos)
+Conf::Action Agent::getActionHC(int pos)
 {
     this->m_count = (this->m_count + 1) % (Conf::COLS * Conf::ROWS);
 
@@ -35,7 +35,7 @@ Conf::Action Agent::get_action_hc(int pos)
  * 
  */
 
-Conf::Action Agent::get_action_phc(int pos_h, int pos_t, int pos_a)
+Conf::Action Agent::getActionPHC(int pos_h, int pos_t, int pos_a) const
 {
     Conf::Action action = Conf::NOOP;
     int sc = 0;
