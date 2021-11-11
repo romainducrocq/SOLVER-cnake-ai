@@ -13,8 +13,7 @@ class Window
     protected:
         sf::RenderWindow   m_window;
         sfev::EventManager m_ev_manager;
-
-        Renderer m_renderer;
+        Renderer           m_renderer;
 
 protected:
         void run();
