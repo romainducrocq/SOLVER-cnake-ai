@@ -7,7 +7,7 @@
 
 ### Build
 
-- **Dep**: `sudo apt-get update && apt-get install g++ cmake libsfml-dev`  
+- **Dep**: `sudo apt-get update && sudo apt-get install g++ cmake libsfml-dev`  
 - **Run**: `cd bin/ && ./build.sh -R && ./compile.sh && ./run.sh -M phc -S small`  
 
 ```
