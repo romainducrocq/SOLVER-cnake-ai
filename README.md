@@ -1,4 +1,4 @@
-## CNAKE++AI: a snake ai in c++ 
+## Hamiltonian Snake: a snake ai in c++ 
 
 - Perturbated Hamiltonian Cycle: https://johnflux.com/2015/05/02/nokia-6110-part-3-algorithms/
 
