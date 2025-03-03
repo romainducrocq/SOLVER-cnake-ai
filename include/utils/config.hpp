@@ -91,7 +91,7 @@ struct DefaultConf
 };
 
 template<typename T>
-const char* DefaultConf<T>::NAME = "CNAKE++AI";
+const char* DefaultConf<T>::NAME = "Hamiltonian Snake";
 template<typename T>
 const int DefaultConf<T>::BG_COL[3] = { 51, 51, 51 };
 template<typename T>

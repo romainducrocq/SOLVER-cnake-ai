@@ -13,7 +13,7 @@
 ```
 usage: apps/exec [-h] [-M MODE] [-S SIZE]
 
-CNAKE++AI
+Hamiltonian Snake
 
 optional args:
   -h       show this help message and exit
